@@ -1,0 +1,154 @@
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  background-color: #1d1d1d;
+  color: #ffffff;
+  min-height: 100vh; /* Ensure the body takes full viewport height */
+  display: flex;
+  flex-direction: column; /* Stack header, content, and footer */
+}
+
+.container {
+  display: flex;
+  flex-direction: row; /* Align text and image side by side */
+  justify-content: space-between; /* Space between text and image */
+  align-items: center; /* Center content vertically */
+  max-width: 1200px; /* Limit the content width */
+  width: 100%; /* Full-width container */
+  height: calc(100vh - 8rem);
+  flex-grow: 1; /* Allow the container to expand and push the footer down */
+  margin: 0 auto; /* Center horizontally */
+  padding: 2rem 5vw; /* Add padding on the sides */
+  box-sizing: border-box; /* Include padding in width/height calculation */
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.welcome-text,
+.description {
+  font-size: 1.5rem;
+  color: #c5c5c5;
+}
+
+/* Main heading styling */
+h1 {
+  font-size: 3.5rem;
+  line-height: 1.4;
+}
+
+.highlight {
+  color: #ff3366;
+}
+
+/* Paragraph description */
+.description {
+  font-size: 1.4rem;
+  line-height: 2;
+  color: #c5c5c5;
+  max-width: 600px;
+  text-align: left;
+  margin-top: 1rem;
+  margin-right: 2rem;
+}
+
+/* Image container styling */
+.image-container {
+  max-width: 60%; /* Default image size */
+  width: 60%; /* Use a percentage for proportional resizing */
+  margin-left: 3rem; /* Maintain spacing between text and image */
+}
+
+.profile-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(1vw);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Layout for Medium Screens */
+@media (max-width: 1200px) {
+  .container {
+    padding: 1.5rem 4vw;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  .description {
+    font-size: 1.3rem;
+  }
+
+  .image-container {
+    max-width: 40%;
+    width: 40%;
+  }
+}
+
+/* Responsive Layout for Small Screens */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center; /* Ensure content is horizontally centered */
+    align-items: center; /* Center items horizontally when stacked */
+    padding: 2rem;
+    height: auto;
+  }
+
+  .welcome-text,
+  .description {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .description {
+    font-size: 1.2rem;
+    margin-right: 0; /* Remove unnecessary margin */
+  }
+
+  .image-container {
+    max-width: 250px;
+    width: 250px;
+    margin-left: 0;
+    margin-top: 2rem;
+  }
+}
+
+/* Responsive Layout for Extra Small Screens */
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+    height: auto;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .image-container {
+    max-width: 300px;
+    width: 300px;
+  }
+}

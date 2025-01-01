@@ -1,0 +1,150 @@
+/* General Navbar Styles */
+.navbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1d1d1d;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-family: "Arial", sans-serif;
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  gap: 0.3rem;
+  cursor: pointer;
+  padding: 1rem 5%;
+}
+
+.hamburger-menu .bar {
+  width: 2rem;
+  height: 0.2rem;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+/* Navigation Links */
+#nav-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+#left-options {
+  display: flex;
+  gap: 2rem;
+}
+
+#right-options {
+  display: flex;
+  margin-left: auto;
+}
+
+#left-options li,
+#right-options li {
+  list-style: none;
+  cursor: pointer;
+}
+
+/* Styling for nav-item wrapper */
+.nav-item {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+/* Hover Effect */
+.nav-item:hover {
+  color: #ff6600;
+}
+
+/* Expanded Menu */
+#nav-options.expanded {
+  display: block;
+  width: 100%;
+  background-color: #1d1d1d;
+  padding: 1rem;
+  animation: slideDown 0.3s ease;
+}
+
+#nav-options.expanded #left-options,
+#nav-options.expanded #right-options {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#left-options li,
+#right-options li {
+  width: 100%;
+}
+
+.nav-item {
+  width: 100%;
+  text-align: left;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shrink text dynamically */
+@media (max-width: 2000px) {
+  .nav-item {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 1800px) {
+  .nav-item {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 1600px) {
+  .nav-item {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 1400px) {
+  .nav-item {
+    font-size: 1.1rem;
+  }
+}
+
+/* Responsive Styling */
+@media (max-width: 1024px) {
+  .hamburger-menu {
+    display: flex;
+  }
+
+  #nav-options {
+    display: none;
+  }
+
+  #nav-options.expanded {
+    display: flex;
+  }
+
+  #right-options {
+    margin-top: 1rem;
+  }
+}

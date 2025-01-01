@@ -1,0 +1,778 @@
+/* General Section Styling */
+.experience-section {
+  padding: 6vw 4vw;
+  background: linear-gradient(135deg, #1e1e1e, #292929);
+  color: #ffffff;
+  font-family: "Roboto", sans-serif;
+  border-radius: 1.5vw;
+  box-shadow: 0 1vw 2vw rgba(0, 0, 0, 0.7);
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Section Title Styling */
+.experience-title {
+  font-size: 3.5vw;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  color: #ff6600;
+  text-align: center;
+}
+
+/* General Card Styling */
+.experience-card {
+  background: #212121;
+  padding: 3vw;
+  margin-bottom: 4vw;
+  border-radius: 1.2vw;
+  border: 0.2vw solid #444;
+  box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.experience-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 1vw 2vw rgba(0, 0, 0, 0.9);
+  border-color: #ff6600;
+}
+
+.google-title {
+  display: flex;
+  align-items: center;
+  gap: 0.2vw;
+  font-size: 3vw;
+  font-weight: bold;
+  position: relative;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.google-title .letter {
+  color: var(--color);
+  text-shadow: 0 0.3vw 0.6vw rgba(0, 0, 0, 0.4), 0 0.5vw 1vw var(--color);
+  animation: glow 2s infinite ease-in-out;
+}
+
+.google-title .letter:hover {
+  transform: scale(1.1);
+  animation: none; /* Stop animation on hover */
+  transition: transform 0.2s ease, text-shadow 0.2s ease;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(1vw);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.whirlab .experience-card-title {
+  font-size: 2.5vw;
+  font-weight: bold;
+  color: #ff6600;
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+  animation: fadeIn 1.5s ease-in-out;
+  position: relative;
+}
+
+.whirlab .experience-card-title:after {
+  content: "🌊"; /* Wave emoji added after the title */
+  font-size: 2.5vw; /* Adjust size */
+  color: #00bfff; /* Wave color */
+  text-shadow: 0 0.3vw 0.5vw rgba(0, 191, 255, 0.7),
+    /* Soft glow */ 0 0.6vw 1vw rgba(0, 150, 255, 0.4); /* Outer glow */
+  margin-left: 0.5vw; /* Space between text and wave */
+  display: inline-block;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.whirlab-title-container {
+  background: linear-gradient(135deg, #2c2c2c, #1e1e1e); /* Subtle gradient */
+  border: 0.2vw solid #00bfff; /* Clean border */
+  padding: 1.5vw 2.5vw; /* Slightly increased padding for breathing space */
+  border-radius: 1vw;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7vw;
+}
+
+.whirlab-title span {
+  font-size: 2.5vw;
+  font-family: "Arial", sans-serif;
+  color: #ffffff;
+  text-shadow: 0 0.4vw 0.6vw rgba(255, 255, 255, 5); /* Brighter glow */
+}
+
+.whirlab-title .red {
+  color: #ff4500; /* Softer red */
+  text-shadow: 0 0.4vw 0.6vw rgba(255, 69, 0, 0.8); /* Enhanced red glow */
+}
+
+.njgset-title {
+  font-size: 2.5vw;
+  font-weight: bold;
+  display: inline-flex;
+  flex-wrap: wrap; /* Ensure words stack properly on smaller screens */
+  gap: 0.3vw; /* Spacing between words */
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.njgset-title span {
+  text-shadow: 0 0.2vw 0.5vw rgba(0, 0, 0, 0.8),
+    0 0.5vw 1vw rgba(255, 0, 0, 0.6); /* Subtle glow */
+}
+
+.njgset-title span:nth-child(odd) {
+  text-shadow: 0 0.2vw 0.5vw rgba(0, 0, 0, 0.8),
+    0 0.5vw 1vw rgba(255, 0, 0, 0.6); /* Red glow for odd words */
+}
+
+.njgset-title span:nth-child(even) {
+  text-shadow: 0 0.2vw 0.5vw rgba(0, 0, 0, 0.8),
+    0 0.5vw 1vw rgba(0, 0, 255, 0.6); /* Blue glow for even words */
+}
+
+/* Subtitle and Location Styling */
+.experience-subtitle {
+  font-size: 1.8vw;
+  color: #c5c5c5;
+  font-style: italic;
+  margin-bottom: 1vw;
+}
+
+.experience-location {
+  font-size: 1.4vw;
+  color: #a5a5a5;
+  margin-bottom: 1.5vw;
+  position: relative;
+}
+
+.experience-location:before {
+  position: absolute;
+  left: 0;
+  top: 0.1vw;
+  font-size: 1.8vw;
+  color: #ff6600;
+}
+
+/* Technologies Styling */
+.experience-technologies {
+  font-size: 1.4vw;
+  color: #ff8c00;
+  margin-top: 1vw;
+  text-shadow: 0.1vw 0.1vw 0.2vw rgba(0, 0, 0, 0.6);
+}
+
+/* Responsibilities Container */
+.responsibilities {
+  margin-top: 2vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5vw; /* Space between responsibility items */
+  padding: 0;
+}
+
+/* Responsibility Item */
+.responsibility-item {
+  display: flex;
+  align-items: flex-start; /* Align text to top for better readability */
+  gap: 1vw; /* Space between icon and text */
+}
+
+.responsibility-icon {
+  font-size: 1.8vw;
+  color: #ff6600; /* Highlighted color for the icon */
+}
+
+.responsibility-text {
+  font-size: 1.3vw;
+  line-height: 1.8;
+  color: #ffffff;
+  text-align: left;
+}
+
+/* Publications Section */
+.publications-section {
+  margin-top: 5vw;
+  padding: 3vw 2vw;
+  background: linear-gradient(145deg, #292929, #1d1d1d);
+  border-radius: 1.5vw;
+  box-shadow: 0 0.6vw 1.2vw rgba(0, 0, 0, 0.8);
+  text-align: center; /* Ensures everything inside is centered */
+}
+
+.publications-section h2 {
+  font-size: 2.5vw;
+  color: #ff6600;
+  margin-bottom: 2vw; /* Adjusted spacing */
+  text-shadow: 0.1vw 0.1vw 0.2vw rgba(0, 0, 0, 0.6);
+  border-bottom: 0.2vw solid #ff6600;
+  display: inline-block;
+  padding-bottom: 0.5vw;
+}
+
+.publications-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Ensures the list items are centered */
+  gap: 1.5vw;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.publications-list li {
+  font-size: 1.4vw;
+  color: #ffffff;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.publication-link {
+  text-decoration: underline; /* Makes links underlined */
+  font-size: 1.5vw;
+  color: #ffffff;
+}
+
+.publication-link:hover {
+  color: #ff3366; /* Change to red on hover */
+  transform: scale(1.05); /* Adds hover effect */
+}
+
+/* Responsive Layout */
+@media (max-width: 1300px) {
+  /* General Section Styling */
+  .experience-section {
+    height: auto;
+  }
+
+  /* Section Title Styling */
+  .experience-title {
+    font-size: 4.2vw;
+  }
+
+  .google-title {
+    font-size: 4vw;
+  }
+
+  /* WHIRLab Title Styling */
+  .whirlab .experience-card-title {
+    font-size: 3vw;
+  }
+
+  .whirlab-title span {
+    font-size: 3.5vw;
+  }
+
+  .whirlab .experience-card-title:before {
+    font-size: 3vw; /* Slightly increased size */
+  }
+
+  .njgset-title {
+    font-size: 3.5vw;
+  }
+
+  /* Subtitle and Location Styling */
+  .experience-subtitle {
+    font-size: 2.3vw;
+  }
+
+  .experience-location {
+    font-size: 1.8vw;
+  }
+
+  .experience-location:before {
+    font-size: 2.3vw;
+  }
+
+  /* Technologies Styling */
+  .experience-technologies {
+    font-size: 1.8vw;
+  }
+
+  .responsibility-icon {
+    font-size: 2vw;
+  }
+
+  .responsibility-text {
+    font-size: 1.5vw;
+  }
+
+  .publications-section h2 {
+    font-size: 3vw;
+  }
+
+  .publications-list li {
+    font-size: 1.8vw;
+  }
+
+  .publication-link {
+    font-size: 2vw;
+  }
+}
+
+/* Responsive Layout */
+@media (max-width: 1200px) {
+  .experience-title {
+    font-size: 4.5vw;
+  }
+
+  .google-title {
+    font-size: 4.3vw;
+  }
+
+  /* WHIRLab Title Styling */
+  .whirlab .experience-card-title {
+    font-size: 3.3vw;
+  }
+
+  .whirlab-title span {
+    font-size: 3.8vw;
+  }
+
+  .whirlab .experience-card-title:before {
+    font-size: 3.4vw; /* Slightly increased size */
+  }
+
+  .njgset-title {
+    font-size: 3.8vw;
+  }
+
+  /* Subtitle and Location Styling */
+  .experience-subtitle {
+    font-size: 2.7vw;
+  }
+
+  .experience-location {
+    font-size: 2.2vw;
+  }
+
+  .experience-location:before {
+    font-size: 2.7vw;
+  }
+
+  /* Technologies Styling */
+  .experience-technologies {
+    font-size: 2.2vw;
+  }
+
+  .responsibility-icon {
+    font-size: 2.2vw;
+  }
+
+  .responsibility-text {
+    font-size: 1.7vw;
+  }
+
+  .publications-section h2 {
+    font-size: 3.3vw;
+  }
+
+  .publications-list li {
+    font-size: 2.2vw;
+  }
+
+  .publication-link {
+    font-size: 2.2vw;
+  }
+}
+
+/* Responsive Layout */
+@media (max-width: 1100px) {
+  .experience-title {
+    font-size: 4.7vw;
+  }
+
+  .google-title {
+    font-size: 4.5vw;
+  }
+
+  /* WHIRLab Title Styling */
+  .whirlab .experience-card-title {
+    font-size: 3.5vw;
+  }
+
+  .whirlab-title span {
+    font-size: 4vw;
+  }
+
+  .whirlab .experience-card-title:before {
+    font-size: 3.6vw; /* Slightly increased size */
+  }
+
+  .njgset-title {
+    font-size: 4vw;
+  }
+
+  /* Subtitle and Location Styling */
+  .experience-subtitle {
+    font-size: 2.9vw;
+  }
+
+  .experience-location {
+    font-size: 2.4vw;
+  }
+
+  .experience-location:before {
+    font-size: 2.9vw;
+  }
+
+  /* Technologies Styling */
+  .experience-technologies {
+    font-size: 2.4vw;
+  }
+
+  .responsibility-icon {
+    font-size: 2.4vw;
+  }
+
+  .responsibility-text {
+    font-size: 1.9vw;
+  }
+
+  .publications-section h2 {
+    font-size: 3.5vw;
+  }
+
+  .publications-list li {
+    font-size: 2.4vw;
+  }
+
+  .publication-link {
+    font-size: 2.4vw;
+  }
+}
+
+/* Responsive Layout */
+@media (max-width: 1000px) {
+  .experience-title {
+    font-size: 4.9vw;
+  }
+
+  .google-title {
+    font-size: 4.7vw;
+  }
+
+  /* WHIRLab Title Styling */
+  .whirlab .experience-card-title {
+    font-size: 3.7vw;
+  }
+
+  .whirlab-title span {
+    font-size: 4.2vw;
+  }
+
+  .whirlab .experience-card-title:before {
+    font-size: 3.8vw; /* Slightly increased size */
+  }
+
+  .njgset-title {
+    font-size: 4.2vw;
+  }
+
+  /* Subtitle and Location Styling */
+  .experience-subtitle {
+    font-size: 3.1vw;
+  }
+
+  .experience-location {
+    font-size: 2.6vw;
+  }
+
+  .experience-location:before {
+    font-size: 3.1vw;
+  }
+
+  /* Technologies Styling */
+  .experience-technologies {
+    font-size: 2.6vw;
+  }
+
+  .responsibility-icon {
+    font-size: 2.6vw;
+  }
+
+  .responsibility-text {
+    font-size: 2.1vw;
+  }
+
+  .publications-section h2 {
+    font-size: 3.5vw;
+  }
+
+  .publications-list li {
+    font-size: 2.4vw;
+  }
+
+  .publication-link {
+    font-size: 2.4vw;
+  }
+}
+
+/* Responsive Layout */
+@media (max-width: 900px) {
+  .experience-title {
+    font-size: 5.1vw;
+  }
+
+  .google-title {
+    font-size: 4.9vw;
+  }
+
+  /* WHIRLab Title Styling */
+  .whirlab .experience-card-title {
+    font-size: 3.9vw;
+  }
+
+  .whirlab-title span {
+    font-size: 4.4vw;
+  }
+
+  .whirlab .experience-card-title:before {
+    font-size: 4vw; /* Slightly increased size */
+  }
+
+  .njgset-title {
+    font-size: 4.4vw;
+  }
+
+  /* Subtitle and Location Styling */
+  .experience-subtitle {
+    font-size: 3.3vw;
+  }
+
+  .experience-location {
+    font-size: 2.8vw;
+  }
+
+  .experience-location:before {
+    font-size: 3.3vw;
+  }
+
+  /* Technologies Styling */
+  .experience-technologies {
+    font-size: 2.8vw;
+  }
+
+  .responsibility-icon {
+    font-size: 2.8vw;
+  }
+
+  .responsibility-text {
+    font-size: 2.3vw;
+  }
+
+  .publications-section h2 {
+    font-size: 3.7vw;
+  }
+
+  .publications-list li {
+    font-size: 2.6vw;
+  }
+
+  .publication-link {
+    font-size: 2.6vw;
+  }
+}
+
+/* Responsive Layout */
+@media (max-width: 800px) {
+  .experience-title {
+    font-size: 5.3vw;
+  }
+
+  .google-title {
+    font-size: 5.1vw;
+  }
+
+  /* WHIRLab Title Styling */
+  .whirlab .experience-card-title {
+    font-size: 4.1vw;
+  }
+
+  .whirlab-title span {
+    font-size: 4.6vw;
+  }
+
+  .whirlab .experience-card-title:before {
+    font-size: 4.2vw; /* Slightly increased size */
+  }
+
+  .njgset-title {
+    font-size: 4.6vw;
+  }
+
+  /* Subtitle and Location Styling */
+  .experience-subtitle {
+    font-size: 3.5vw;
+  }
+
+  .experience-location {
+    font-size: 3vw;
+  }
+
+  .experience-location:before {
+    font-size: 3.5vw;
+  }
+
+  /* Technologies Styling */
+  .experience-technologies {
+    font-size: 3vw;
+  }
+
+  .responsibility-icon {
+    font-size: 3vw;
+  }
+
+  .responsibility-text {
+    font-size: 2.5vw;
+  }
+
+  .publications-section h2 {
+    font-size: 3.9vw;
+  }
+
+  .publications-list li {
+    font-size: 2.8vw;
+  }
+
+  .publication-link {
+    font-size: 2.8vw;
+  }
+}
+
+/* Responsive Layout */
+@media (max-width: 700px) {
+  .experience-title {
+    font-size: 5.5vw;
+  }
+
+  .google-title {
+    font-size: 5.2vw;
+  }
+
+  /* WHIRLab Title Styling */
+  .whirlab .experience-card-title {
+    font-size: 4.2vw;
+  }
+
+  .whirlab-title span {
+    font-size: 4.7vw;
+  }
+
+  .whirlab .experience-card-title:before {
+    font-size: 4.3vw; /* Slightly increased size */
+  }
+
+  .njgset-title {
+    font-size: 4.7vw;
+  }
+
+  /* Subtitle and Location Styling */
+  .experience-subtitle {
+    font-size: 3.6vw;
+  }
+
+  .experience-location {
+    font-size: 3.1vw;
+  }
+
+  .experience-location:before {
+    font-size: 3.6vw;
+  }
+
+  /* Technologies Styling */
+  .experience-technologies {
+    font-size: 3.1vw;
+  }
+
+  .responsibility-icon {
+    font-size: 3.2vw;
+  }
+
+  .responsibility-text {
+    font-size: 2.7vw;
+  }
+
+  .publications-section h2 {
+    font-size: 4vw;
+  }
+
+  .publications-list li {
+    font-size: 2.9vw;
+  }
+
+  .publication-link {
+    font-size: 2.9vw;
+  }
+}
+
+/* Responsive Layout */
+@media (max-width: 600px) {
+  .experience-title {
+    font-size: 7vw;
+  }
+
+  .google-title {
+    font-size: 5.7vw;
+  }
+
+  /* WHIRLab Title Styling */
+  .whirlab .experience-card-title {
+    font-size: 4.7vw;
+  }
+
+  .whirlab-title span {
+    font-size: 5.2vw;
+  }
+
+  .whirlab .experience-card-title:before {
+    font-size: 4.8vw; /* Slightly increased size */
+  }
+
+  .njgset-title {
+    font-size: 5.2vw;
+  }
+
+  /* Subtitle and Location Styling */
+  .experience-subtitle {
+    font-size: 4.1vw;
+  }
+
+  .experience-location {
+    font-size: 3.6vw;
+  }
+
+  .experience-location:before {
+    font-size: 4.1vw;
+  }
+
+  /* Technologies Styling */
+  .experience-technologies {
+    font-size: 3.6vw;
+  }
+
+  .responsibility-icon {
+    font-size: 3.4vw;
+  }
+
+  .responsibility-text {
+    font-size: 2.9vw;
+  }
+
+  .publications-section h2 {
+    font-size: 4.5vw;
+  }
+
+  .publications-list li {
+    font-size: 3.4vw;
+  }
+
+  .publication-link {
+    font-size: 3.4vw;
+  }
+}

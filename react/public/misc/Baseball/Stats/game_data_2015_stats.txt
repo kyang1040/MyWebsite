@@ -1,0 +1,25 @@
+Plate Appearances: 183
+At Bats: 157
+Hits: 67
+Singles: 41
+Doubles: 21
+Triples: 3
+Home Runs: 2
+Batting Average: 0.427
+On Base Percentage: 0.497
+Number of Walks: 24
+Number of Hit By Pitches: 0
+RBIs: 59
+Total Bases: 100
+Number of Sacrifice Flies: 2
+Strikeouts Total: 18
+Strikeouts Swinging: 16
+Strikeouts Looking: 2
+Slugging: 0.637
+OPS: 1.134
+Groundouts: 33
+Errors: 14
+Fielder Choices: 3
+Lineouts: 8
+Popouts: 10
+Flyouts: 4

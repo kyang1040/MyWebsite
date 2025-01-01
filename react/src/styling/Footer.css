@@ -1,0 +1,101 @@
+footer {
+  background-color: #1d1d1d; /* Black background to match header */
+  color: #ffffff; /* White text color for contrast */
+  height: 4rem; /* Reduced height */
+  display: flex; /* Flexbox for alignment */
+  justify-content: center; /* Center-align content */
+  align-items: center; /* Center content vertically */
+  width: 100%; /* Ensure it spans the full width */
+  padding: 0 5%; /* Horizontal padding only */
+  border-top: 2px solid #ff6600; /* Orange border for sleek separation */
+  position: sticky; /* Keep the footer at the bottom of the viewport */
+  bottom: 0; /* Stick to the bottom */
+  z-index: 10; /* Ensure the footer is above other content */
+}
+
+footer::before {
+  content: ""; /* Pseudo-element for the orange line */
+  position: absolute;
+  top: 0; /* Position the line at the top of the footer */
+  left: 0;
+  width: 100%;
+  height: 5px; /* Use fixed height instead of vh */
+  background-color: #e77500; /* Orange color matching the navbar line */
+}
+
+.footer-container {
+  display: flex;
+  max-width: 1200px; /* Limit the width to bring items closer */
+  width: 100%;
+  justify-content: space-between; /* Space out footer content */
+  align-items: center; /* Vertically center items */
+  white-space: nowrap; /* Prevent text wrapping */
+  box-sizing: border-box; /* Include padding and border in calculations */
+}
+
+.footer-container p {
+  font-size: 1.2rem; /* Adjust text size for balance */
+  margin: 0; /* Remove unnecessary margin */
+  color: #ffffff; /* White text matching the header */
+}
+
+.footer-container a {
+  color: white;
+  text-decoration: underline; /* No underline for links */
+  transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.footer-container a:hover {
+  color: #ff3366; /* Change to red on hover */
+}
+
+/* Shrink text dynamically */
+@media (max-width: 2000px) {
+  .footer-container p {
+    font-size: 1.4rem; /* Slightly smaller font size */
+  }
+}
+
+@media (max-width: 1800px) {
+  .footer-container p {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 1600px) {
+  .footer-container p {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 1400px) {
+  .footer-container p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .footer-container p {
+    font-size: 1rem;
+  }
+}
+
+/* Responsive Layout */
+@media (max-width: 1024px) {
+  footer {
+    flex-direction: column; /* Stack items vertically */
+    height: auto; /* Allow height to adjust dynamically */
+    padding: 1rem 3%; /* Adjust padding for smaller screens */
+    text-align: center; /* Center-align all content */
+  }
+
+  .footer-container {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 0.5rem; /* Add spacing between items */
+  }
+
+  .footer-container p {
+    font-size: 1rem; /* Adjust font size for smaller screens */
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.dd01655b.css",
+    "main.js": "/static/js/main.e3e4dfef.js",
+    "static/js/453.28c81ab3.chunk.js": "/static/js/453.28c81ab3.chunk.js",
+    "static/media/princeton.jpg": "/static/media/princeton.d3e75adcc011b858e735.jpg",
+    "static/media/headshot.jpeg": "/static/media/headshot.8d301e3e6680fb150163.jpeg",
+    "index.html": "/index.html",
+    "main.dd01655b.css.map": "/static/css/main.dd01655b.css.map",
+    "main.e3e4dfef.js.map": "/static/js/main.e3e4dfef.js.map",
+    "453.28c81ab3.chunk.js.map": "/static/js/453.28c81ab3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dd01655b.css",
+    "static/js/main.e3e4dfef.js"
+  ]
+}

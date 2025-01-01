@@ -1,0 +1,299 @@
+/* Overall Page Styling */
+.contact-page {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Vertically centers the content */
+  height: calc(100vh - 8rem);
+  background: radial-gradient(circle, #1e1e1e, #292929);
+  color: #ffffff;
+  font-family: "Roboto", sans-serif;
+  padding: 2vw;
+  box-sizing: border-box; /* Ensures padding doesn't overflow viewport */
+  overflow: hidden; /* Avoids scrollbars caused by large shadows */
+}
+
+/* Contact Card Styling */
+.contact-card {
+  background: linear-gradient(135deg, #ff6600, #ff3366);
+  padding: 3vw;
+  border-radius: 2vw;
+  box-shadow: 0 1vw 2vw rgba(0, 0, 0, 0.7);
+  text-align: center;
+  max-width: 600px;
+  width: 90%;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Title Styling */
+.title {
+  font-size: 2.4vw;
+  font-weight: bold;
+  margin-bottom: 2vw;
+  color: #ffffff;
+  text-shadow: 0 0.3vw 0.6vw rgba(0, 0, 0, 0.6);
+}
+
+/* Contact Info Styling */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5vw;
+}
+
+/* Info Item Styling */
+.info-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.5vw;
+  font-size: 1.1vw;
+  background: #212121;
+  padding: 1vw 1.5vw;
+  border-radius: 1.2vw;
+  box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none; /* Ensures the link styles are uniform */
+  color: #ffffff; /* Ensures consistent text color */
+}
+
+.info-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0.8vw 1.6vw rgba(0, 0, 0, 0.8);
+  background: linear-gradient(135deg, #ff3366, #ff6600);
+}
+
+/* Icon Styling */
+.icon {
+  font-size: 2.1vw;
+  color: #ffffff;
+  text-shadow: 0 0.3vw 0.6vw rgba(0, 0, 0, 0.4);
+}
+
+/* Info Link Styling */
+.info-link {
+  text-decoration: none;
+  font-size: 1.2vw;
+  font-weight: bold;
+  color: inherit; /* Inherits color from the parent */
+}
+
+.info-item:hover .info-link {
+  color: #ffdd99;
+  text-shadow: 0 0.2vw 0.4vw rgba(255, 221, 153, 0.8);
+}
+
+@media (max-width: 1600px) {
+  .title {
+    font-size: 2.6vw;
+  }
+
+  .info-item {
+    font-size: 1.2vw;
+  }
+
+  .icon {
+    font-size: 2.4vw;
+  }
+
+  .info-link {
+    font-size: 1.3vw;
+  }
+}
+
+@media (max-width: 1500px) {
+  .title {
+    font-size: 3vw;
+  }
+
+  .info-item {
+    font-size: 1.4vw;
+  }
+
+  .icon {
+    font-size: 2.7vw;
+  }
+
+  .info-link {
+    font-size: 1.4vw;
+  }
+}
+
+@media (max-width: 1400px) {
+  .title {
+    font-size: 3.3vw;
+  }
+
+  .info-item {
+    font-size: 1.6vw;
+  }
+
+  .icon {
+    font-size: 3vw;
+  }
+
+  .info-link {
+    font-size: 1.5vw;
+  }
+}
+
+@media (max-width: 1300px) {
+  .title {
+    font-size: 3.6vw;
+  }
+
+  .info-item {
+    font-size: 1.9vw;
+  }
+
+  .icon {
+    font-size: 3.5vw;
+  }
+
+  .info-link {
+    font-size: 1.6vw;
+  }
+}
+
+@media (max-width: 1200px) {
+  .title {
+    font-size: 4vw;
+  }
+
+  .info-item {
+    font-size: 2.2vw;
+  }
+
+  .icon {
+    font-size: 4vw;
+  }
+
+  .info-link {
+    font-size: 1.7vw;
+  }
+}
+
+@media (max-width: 1100px) {
+  .title {
+    font-size: 4.3vw;
+  }
+
+  .info-item {
+    font-size: 2.5vw;
+  }
+
+  .icon {
+    font-size: 4.5vw;
+  }
+
+  .info-link {
+    font-size: 2vw;
+  }
+}
+
+@media (max-width: 1000px) {
+  .title {
+    font-size: 4.7vw;
+  }
+
+  .info-item {
+    font-size: 3vw;
+  }
+
+  .icon {
+    font-size: 5vw;
+  }
+
+  .info-link {
+    font-size: 2.3vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .title {
+    font-size: 5.1vw;
+  }
+
+  .info-item {
+    font-size: 3.5vw;
+  }
+
+  .icon {
+    font-size: 6vw;
+  }
+
+  .info-link {
+    font-size: 2.5vw;
+  }
+}
+
+@media (max-width: 800px) {
+  .title {
+    font-size: 5.5vw;
+  }
+
+  .info-item {
+    font-size: 4vw;
+  }
+
+  .icon {
+    font-size: 7vw;
+  }
+
+  .info-link {
+    font-size: 2.7vw;
+  }
+}
+
+@media (max-width: 700px) {
+  .title {
+    font-size: 5.9vw;
+  }
+
+  .info-item {
+    font-size: 4.5vw;
+  }
+
+  .icon {
+    font-size: 9vw;
+  }
+
+  .info-link {
+    font-size: 3vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 6.3vw;
+  }
+
+  .info-item {
+    font-size: 5vw;
+  }
+
+  .icon {
+    font-size: 11vw;
+  }
+
+  .info-link {
+    font-size: 3.3vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .title {
+    font-size: 6.7vw;
+  }
+
+  .info-item {
+    font-size: 6vw;
+  }
+
+  .icon {
+    font-size: 12vw;
+  }
+
+  .info-link {
+    font-size: 3.6vw;
+  }
+}

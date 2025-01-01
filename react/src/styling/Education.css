@@ -1,0 +1,493 @@
+.education-section {
+  padding: 7vw 3vw;
+  background-color: #1d1d1d;
+  color: #ffffff;
+  text-align: center;
+  height: calc(100vh - 8rem);
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.education-title {
+  font-size: 2.5vw;
+  margin-bottom: 3vw;
+  color: #ff6600;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1vw;
+}
+
+.education-content-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2vw;
+}
+
+.education-card {
+  flex: 1 1 45%;
+  background: #292929;
+  border: 0.15vw solid #ff6600;
+  border-radius: 0.8vw;
+  padding: 2vw;
+  text-align: left;
+  position: relative;
+  box-shadow: 0 0.4vw 1.2vw rgba(0, 0, 0, 0.5);
+}
+
+.education-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5vw;
+}
+
+.education-header h2 {
+  margin: 0;
+  font-size: 1.5vw;
+  color: #ffffff;
+}
+
+.graduation-date {
+  font-size: 1vw;
+  color: #c5c5c5;
+  font-style: italic;
+}
+
+.gpa-top {
+  font-size: 1vw;
+  font-weight: bold;
+  color: #ff6600;
+  background: #333333;
+  padding: 0.5vw 1vw;
+  border-radius: 0.5vw;
+  box-shadow: 0 0.3vw 0.8vw rgba(0, 0, 0, 0.5);
+}
+
+.education-image {
+  flex: 1 1 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.education-image img {
+  width: 100%;
+  max-width: 40vw;
+  height: auto;
+  border-radius: 0.8vw;
+  box-shadow: 0 0.5vw 1.5vw rgba(0, 0, 0, 0.5);
+}
+
+.degree {
+  font-size: 1.2vw;
+  font-weight: 600;
+  margin-bottom: 1vw;
+}
+
+.minor {
+  font-size: 1vw;
+  margin-bottom: 1vw;
+}
+
+.coursework {
+  margin-top: 1.5vw;
+}
+
+.coursework strong {
+  font-size: 1.6vw;
+  color: #ff6600;
+  display: block;
+  margin-bottom: 1vw;
+}
+
+.coursework-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16vw, 1fr));
+  gap: 1vw;
+  list-style: none;
+  padding: 0;
+}
+
+.coursework-list li {
+  font-size: 1.1vw;
+  line-height: 1.4;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.coursework-list li a {
+  color: #ffffff;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.coursework-list li a:hover {
+  color: #ff6600;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(1vw);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Layout */
+@media (max-width: 1300px) {
+  .education-section {
+    height: auto;
+  }
+
+  .education-title {
+    font-size: 3vw;
+  }
+
+  .education-content-container {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .education-card,
+  .education-image {
+    flex: 1 1 100%;
+    max-width: 90%;
+    width: 80%;
+    text-align: center;
+    padding: 3vw;
+    margin-bottom: 2vw;
+  }
+
+  .education-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .education-header h2 {
+    font-size: 2.8vw;
+  }
+
+  .gpa-top {
+    margin-top: 1vw;
+    font-size: 2vw;
+  }
+
+  .graduation-date {
+    font-size: 1.8vw;
+  }
+
+  .education-image img {
+    max-width: 100%;
+    margin-bottom: 2vw;
+  }
+
+  .degree,
+  .minor {
+    font-size: 1.8vw;
+  }
+
+  .coursework strong {
+    font-size: 2vw;
+  }
+
+  .coursework-list {
+    grid-template-columns: 1fr;
+  }
+
+  .coursework-list li {
+    font-size: 1.3vw;
+  }
+}
+
+@media (max-width: 1200px) {
+  .education-title {
+    font-size: 3.5vw;
+  }
+
+  .education-header h2 {
+    font-size: 2.5vw;
+  }
+
+  .gpa-top {
+    font-size: 1.8vw;
+  }
+
+  .graduation-date {
+    font-size: 1.6vw;
+  }
+
+  .degree,
+  .minor {
+    font-size: 1.6vw;
+  }
+
+  .coursework strong {
+    font-size: 2.2vw;
+  }
+
+  .coursework-list li {
+    font-size: 1.2vw;
+  }
+}
+
+@media (max-width: 1100px) {
+  .education-title {
+    font-size: 4vw;
+    margin-bottom: 2vw;
+  }
+
+  .education-header h2 {
+    font-size: 2.8vw;
+  }
+
+  .gpa-top {
+    font-size: 2vw;
+  }
+
+  .graduation-date {
+    font-size: 1.8vw;
+  }
+
+  .degree,
+  .minor {
+    font-size: 1.8vw;
+  }
+
+  .coursework strong {
+    font-size: 2.5vw;
+  }
+
+  .coursework-list li {
+    font-size: 1.5vw;
+  }
+}
+
+@media (max-width: 1000px) {
+  .education-title {
+    font-size: 4.5vw;
+    margin-bottom: 1.5vw;
+  }
+
+  .education-card,
+  .education-image {
+    max-width: 95%;
+    width: 85%;
+  }
+
+  .education-header h2 {
+    font-size: 3vw;
+  }
+
+  .gpa-top {
+    font-size: 2.2vw;
+  }
+
+  .graduation-date {
+    font-size: 2vw;
+  }
+
+  .degree,
+  .minor {
+    font-size: 2vw;
+  }
+
+  .coursework strong {
+    font-size: 2.8vw;
+  }
+
+  .coursework-list li {
+    font-size: 1.7vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .education-title {
+    font-size: 5vw;
+    margin-bottom: 1.5vw;
+  }
+
+  .education-header h2 {
+    font-size: 3.5vw;
+  }
+
+  .gpa-top {
+    font-size: 2.5vw;
+  }
+
+  .graduation-date {
+    font-size: 2.2vw;
+  }
+
+  .degree,
+  .minor {
+    font-size: 2.2vw;
+  }
+
+  .coursework strong {
+    font-size: 3vw;
+  }
+
+  .coursework-list li {
+    font-size: 2vw;
+  }
+}
+
+@media (max-width: 800px) {
+  .education-title {
+    font-size: 5.5vw;
+  }
+
+  .education-header h2 {
+    font-size: 4vw;
+  }
+
+  .gpa-top {
+    font-size: 2.8vw;
+  }
+
+  .graduation-date {
+    font-size: 2.5vw;
+  }
+
+  .degree,
+  .minor {
+    font-size: 2.5vw;
+  }
+
+  .coursework strong {
+    font-size: 3.5vw;
+  }
+
+  .coursework-list li {
+    font-size: 2.5vw;
+  }
+}
+
+@media (max-width: 700px) {
+  .education-title {
+    font-size: 6vw;
+  }
+
+  .education-header h2 {
+    font-size: 4.5vw;
+  }
+
+  .gpa-top {
+    font-size: 3vw;
+  }
+
+  .graduation-date {
+    font-size: 2.8vw;
+  }
+
+  .degree,
+  .minor {
+    font-size: 2.8vw;
+  }
+
+  .coursework strong {
+    font-size: 4vw;
+  }
+
+  .coursework-list li {
+    font-size: 3vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .education-title {
+    font-size: 7vw;
+  }
+
+  .education-header h2 {
+    font-size: 5vw;
+  }
+
+  .gpa-top {
+    font-size: 3.5vw;
+  }
+
+  .graduation-date {
+    font-size: 3vw;
+  }
+
+  .degree,
+  .minor {
+    font-size: 3vw;
+  }
+
+  .coursework strong {
+    font-size: 4.5vw;
+  }
+
+  .coursework-list li {
+    font-size: 3.5vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .education-title {
+    font-size: 8vw;
+  }
+
+  .education-header h2 {
+    font-size: 6vw;
+  }
+
+  .gpa-top {
+    font-size: 4vw;
+  }
+
+  .graduation-date {
+    font-size: 3.5vw;
+  }
+
+  .degree,
+  .minor {
+    font-size: 3.5vw;
+  }
+
+  .coursework strong {
+    font-size: 5vw;
+  }
+
+  .coursework-list li {
+    font-size: 4vw;
+  }
+}
+
+@media (max-width: 400px) {
+  .education-title {
+    font-size: 7vw;
+  }
+
+  .education-header h2 {
+    font-size: 6vw;
+  }
+
+  .gpa-top {
+    font-size: 4.5vw;
+  }
+
+  .graduation-date {
+    font-size: 4vw;
+  }
+
+  .degree,
+  .minor {
+    font-size: 4vw;
+  }
+
+  .coursework strong {
+    font-size: 5.5vw;
+  }
+
+  .coursework-list li {
+    font-size: 3vw;
+  }
+}

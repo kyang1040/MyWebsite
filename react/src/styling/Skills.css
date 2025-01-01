@@ -1,0 +1,108 @@
+.skills-page {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #1d1d1d;
+  color: #ffffff;
+  height: calc(100vh - 8rem);
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.skills-title {
+  font-size: 2.5vw;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  color: #ff6600;
+}
+
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(3, auto); /* Prevent horizontal stretching */
+  justify-content: center; /* Center the grid */
+  gap: 6rem; /* Add space between the boxes */
+  padding: 1rem;
+  max-width: 1200px; /* Limit the total width of the grid */
+  margin: 0 auto; /* Center the container */
+}
+
+.category {
+  background-color: #292929;
+  border: 1px solid #ff6600;
+  border-radius: 10px;
+  padding: 1.5rem;
+  width: 25rem; /* Fix width to prevent stretching */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.category-title {
+  margin-bottom: 1rem;
+}
+
+.category h2 {
+  font-size: 1.5rem;
+  color: #ff6600;
+}
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, auto); /* Two items per row */
+  gap: 0.5rem;
+  justify-content: center; /* Center items within the list */
+}
+
+.skills-list li {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.skills-list li:hover {
+  color: #ff3366;
+  transform: translateX(5px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(1vw);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Layout */
+@media (max-width: 1450px) {
+  .skills-title {
+    font-size: 3vw;
+  }
+  .skills-page {
+    height: auto;
+  }
+  .skills-container {
+    grid-template-columns: repeat(2, auto); /* Two columns for medium screens */
+  }
+}
+
+@media (max-width: 950px) {
+  .skills-container {
+    grid-template-columns: 1fr; /* One column layout for small screens */
+  }
+
+  .skills-list {
+    grid-template-columns: 1fr; /* Stack items vertically */
+  }
+
+  .category {
+    padding: 2rem;
+    width: auto; /* Allow full width for small screens */
+  }
+
+  .skills-title {
+    font-size: 2rem;
+  }
+}
