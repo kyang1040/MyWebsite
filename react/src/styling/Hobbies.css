@@ -1,9 +1,14 @@
-/* Base styles */
+/* ========================
+   Base styles
+   ======================== */
 .hobbies-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #1a1a1a, #000000);
   color: #ffffff;
   padding: 2rem 1rem;
+  display: flex; /* Center vertically */
+  flex-direction: column;
+  justify-content: center; /* Push content to center of page */
 }
 
 .content-wrapper {
@@ -24,7 +29,9 @@
   }
 }
 
-/* Title */
+/* ========================
+     Title
+     ======================== */
 .main-title {
   font-size: clamp(2rem, 5vw, 4rem);
   text-align: center;
@@ -36,7 +43,9 @@
   font-weight: 800;
 }
 
-/* Image Gallery */
+/* ========================
+     Image Gallery
+     ======================== */
 .image-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -60,8 +69,7 @@
 /* Keep object-fit: contain so the image isn't cut off */
 .image-card img {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -83,12 +91,15 @@
   opacity: 1;
 }
 
-/* Years Grid */
+/* ========================
+     Years Grid
+     ======================== */
 .years-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
+  align-items: start; /* So toggles align nicely */
 }
 
 .year-card {
@@ -109,6 +120,8 @@
   justify-content: space-between;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .year-button:hover {
@@ -120,13 +133,15 @@
   background: linear-gradient(to right, #e65c00, #ff6b00);
 }
 
-/* Dropdown Menu */
+/* ========================
+     Dropdown Menu
+     ======================== */
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 0.5rem);
   left: 0;
   width: 100%;
-  background: white;
+  background: #ffffff;
   border-radius: 0.75rem;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -164,39 +179,42 @@
   padding-left: 1.5rem;
 }
 
-/* Modal Overlay
-   1) Use align-items: center to vertically center the modal
-*/
+.plus-icon {
+  color: #ff6b00;
+  font-weight: bold;
+}
+
+/* ========================
+     Modal Overlay
+     ======================== */
 .modal-overlay {
   position: fixed;
   inset: 0;
+  /* (3) The rest of the screen is a background color,
+       but now we remove pointer-events for the overlay
+       so you can't click outside. 
+       We'll still see the semi-trans overlay. */
   background: rgba(0, 0, 0, 0.75);
   display: flex;
-  align-items: center; /* Key: Center vertically */
-  justify-content: center; /* Center horizontally */
+  align-items: center; /* center vertically */
+  justify-content: center; /* center horizontally */
+  pointer-events: none; /* disable outside clicks */
   z-index: 50;
 }
 
-/* Modal Content
-   2) Use 80vw & 80vh, plus margin: auto & max-height: 80vh to prevent overflow
-*/
+/* ========================
+     Modal Content
+     ======================== */
 .modal-content {
-  background: white;
+  background: #ffffff;
   border-radius: 1rem;
   width: 80vw;
-  height: auto;
-  max-height: 80vh; /* So it doesn’t overflow the top or bottom */
-  margin: auto; /* Let the flex container center it in overlay */
+  max-height: 80vh;
   position: relative;
   animation: scaleIn 0.3s ease-out;
-  overflow: hidden; /* or auto, if you prefer. We also manage .modal-body overflow. */
-}
-
-.modal-body {
-  padding: 2rem;
-  height: auto;
-  max-height: calc(80vh - 4rem); /* so the content area can scroll */
-  overflow-y: auto;
+  overflow: hidden;
+  /* (3) Let modal be clickable, even though overlay is not */
+  pointer-events: auto;
 }
 
 @keyframes scaleIn {
@@ -210,6 +228,13 @@
   }
 }
 
+.modal-body {
+  padding: 2rem;
+  max-height: calc(80vh - 4rem);
+  overflow-y: auto;
+}
+
+/* X button offset to not overlap content */
 .modal-close {
   position: absolute;
   top: 1rem;
@@ -232,15 +257,21 @@
   transform: rotate(90deg);
 }
 
-/* Content Section */
+/* ========================
+     Content Section
+     ======================== */
 .content-section {
   color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center the headings etc. */
+  gap: 2rem;
 }
 
 .content-section h2 {
   font-size: 2rem;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
   color: #ff6b00;
 }
 
@@ -248,8 +279,9 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  width: 100%;
+  padding: 0 3rem; /* Add horizontal padding to center the videos better */
+  box-sizing: border-box;
 }
 
 .video-wrapper {
@@ -272,8 +304,9 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  width: 100%;
+  padding: 0 3rem;
+  box-sizing: border-box;
 }
 
 .stat-item {
@@ -288,7 +321,9 @@
   background: linear-gradient(to right, #ffe4cc, #fff);
 }
 
-/* Lightbox */
+/* ========================
+     Lightbox
+     ======================== */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -305,7 +340,9 @@
   object-fit: contain;
 }
 
-/* Loading */
+/* ========================
+     Loading
+     ======================== */
 .loading-container {
   min-height: 100vh;
   display: flex;
@@ -332,7 +369,9 @@
   }
 }
 
-/* Error Toast */
+/* ========================
+     Error Toast
+     ======================== */
 .error-toast {
   position: fixed;
   bottom: 1rem;
@@ -354,10 +393,13 @@
   }
 }
 
-/* Responsive Adjustments */
+/* ========================
+     Responsive Adjustments
+     ======================== */
 @media (max-width: 768px) {
   .hobbies-container {
     padding: 1rem;
+    justify-content: flex-start; /* top if on smaller screens */
   }
 
   .main-title {
@@ -369,11 +411,6 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 
-  /* 
-     On smaller screens, fill entire viewport if needed.
-     You can remove this if you want to keep 80vw x 80vh 
-     even on mobile.
-  */
   .modal-content {
     width: 100%;
     max-height: none;

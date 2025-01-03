@@ -1,4 +1,5 @@
 // Hobbies.js
+
 import React, { useState, useEffect } from "react";
 import { X, ChevronDown, ChevronUp } from "lucide-react";
 import "../styling/Hobbies.css";
@@ -28,12 +29,14 @@ const Hobbies = () => {
     const loadContent = async () => {
       try {
         const statsData = {};
+        // Fetch stats only for 2014, 2015, 2016
         for (const year of years.filter((y) => y !== "College")) {
           statsData[year] = await fetchStats(
             `/misc/Baseball/Stats/game_data_${year}_stats.txt`
           );
         }
         setStats(statsData);
+
         const videoData = await fetchVideoData();
         setVideos(videoData);
       } finally {
@@ -66,17 +69,30 @@ const Hobbies = () => {
     }
   };
 
+  // 1) If a year is toggled open and we click "College",
+  //    it closes the toggled year, just like toggling from 2014->2015.
   const toggleYear = (year) => {
+    // Same "close all" logic for any year
+    setYearToggles((prev) =>
+      Object.keys(prev).reduce((acc, key) => {
+        acc[key] = false;
+        return acc;
+      }, {})
+    );
+
     if (year === "College") {
+      // Open the modal immediately
       openModal("College", "College");
       return;
     }
+    // Otherwise, open that year's dropdown
     setYearToggles((prev) => ({
-      ...Object.keys(prev).reduce((acc, key) => ({ ...acc, [key]: false }), {}),
-      [year]: !prev[year],
+      ...prev,
+      [year]: true,
     }));
   };
 
+  // 2) Opening the modal locks body scroll
   const openModal = (year, category) => {
     setActiveYear(year);
     setActiveCategory(category);
@@ -84,10 +100,13 @@ const Hobbies = () => {
     document.body.style.overflow = "hidden";
   };
 
+  // 2) & 5) On close, untoggle year + re-enable body scroll
   const closeModal = () => {
     setModalIsOpen(false);
     setActiveYear(null);
     setActiveCategory(null);
+    // All years get untoggled on close
+    setYearToggles({});
     document.body.style.overflow = "unset";
   };
 
@@ -105,6 +124,7 @@ const Hobbies = () => {
       <div className="content-wrapper">
         <h1 className="main-title">Baseball Throughout the Years...</h1>
 
+        {/* Image Gallery */}
         <div className="image-gallery">
           {imagePaths.map((image, index) => (
             <div
@@ -120,6 +140,7 @@ const Hobbies = () => {
           ))}
         </div>
 
+        {/* Years Grid */}
         <div className="years-grid">
           {years.map((year) => (
             <div key={year} className="year-card">
@@ -128,6 +149,7 @@ const Hobbies = () => {
                 className={`year-button ${yearToggles[year] ? "active" : ""}`}
               >
                 <span>{year}</span>
+                {/* Show up/down chevron for 2014/2015/2016 only */}
                 {year !== "College" &&
                   (yearToggles[year] ? (
                     <ChevronUp className="icon" />
@@ -136,6 +158,7 @@ const Hobbies = () => {
                   ))}
               </button>
 
+              {/* Sub-options appear if toggled (and not College) */}
               {year !== "College" && yearToggles[year] && (
                 <div className="dropdown-menu">
                   {["Stats", "Singles", "Doubles", "Triples", "Homeruns"].map(
@@ -156,9 +179,18 @@ const Hobbies = () => {
           ))}
         </div>
 
+        {/* 3) & 5) Modal only closes with "X"; user can scroll the content inside */}
         {modalIsOpen && (
-          <div className="modal-overlay" onClick={closeModal}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-overlay">
+            {/* 
+              pointer-events: none on the overlay or removing
+              onClick here ensures we can't close by clicking outside 
+            */}
+            <div
+              className="modal-content"
+              // Stop click from closing; user can only press "X"
+              onClick={(e) => e.stopPropagation()}
+            >
               <button className="modal-close" onClick={closeModal}>
                 <X />
               </button>
@@ -174,6 +206,7 @@ const Hobbies = () => {
           </div>
         )}
 
+        {/* Lightbox for images */}
         {selectedImage && (
           <div className="lightbox" onClick={() => setSelectedImage(null)}>
             <img src={selectedImage} alt="Enlarged view" />
