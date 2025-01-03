@@ -1,133 +1,165 @@
-.container {
-  font-family: "Arial", sans-serif;
-  max-width: 1200px; /* Restrict the container width */
-  margin: 0 auto;
-  padding: 20px;
-  color: #fff;
-  background: #121212;
-  overflow-x: hidden; /* Prevent horizontal overflow */
-}
-
-.image-gallery {
-  margin-bottom: 40px;
-  text-align: center;
-}
-
-.image-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.gallery-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  transition: transform 0.3s ease-in-out;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
-}
-
-.gallery-image:hover {
-  transform: scale(1.05);
-}
-
-.year-section {
-  margin-bottom: 40px;
-}
-
-.stats {
-  background-color: #1e1e1e;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-  margin-bottom: 20px;
-}
-
-.stats ul {
-  list-style-type: none;
+/* ------------- Reset default margins/padding for html/body ------------- */
+html,
+body {
+  margin: 0;
   padding: 0;
 }
 
-.stats li {
-  padding: 5px 0;
-}
-
-.videos {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(250px, 1fr)
-  ); /* Dynamic grid */
-  gap: 20px;
-  margin-top: 20px;
-  max-width: 100%; /* Restrict to container width */
-  overflow-x: hidden;
-  box-sizing: border-box; /* Include padding in size */
-}
-
-.video-wrapper {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio */
-  background: #2a2a2a;
+/* ------------- Main Container ------------- */
+.container {
+  font-family: "Arial", sans-serif;
+  max-width: 1200px;
+  margin: 80px auto 0 auto; /* Adjust top margin if you have a fixed header above */
+  padding: 20px;
+  background-color: #f9f9f9; /* Slight off-white */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
 
-.video-loading {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+/* ------------- Image Gallery (5 images at the top) ------------- */
+.image-gallery {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
-  font-size: 14px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #aaa;
+  gap: 20px; /* Spacing between images */
+  margin-bottom: 30px;
 }
 
-.video-error {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  color: #f00;
-  background: rgba(255, 0, 0, 0.1);
-  border: 1px solid red;
+.gallery-image {
+  width: 160px;
+  height: auto;
   border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
-.video {
-  position: absolute;
-  top: 0;
-  left: 0;
+.gallery-image:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ------------- Years Row (2014, 2015, 2016, College) ------------- */
+.years-row {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  gap: 40px; /* Even spacing between year buttons */
+  margin-bottom: 30px;
+}
+
+.year-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ------------- Year Toggle Button ------------- */
+.year-toggle-button {
+  background-color: #2196f3;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.year-toggle-button:hover {
+  background-color: #1976d2;
+  transform: translateY(-2px);
+}
+
+/* ------------- Year Sub-Options (Stats, Singles, etc.) ------------- */
+.year-sub-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.sub-option-button {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 2px solid #90caf9;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.sub-option-button:hover {
+  background-color: #bbdefb;
+  transform: translateX(2px);
+}
+
+/* ------------- Modal ------------- */
+/* 
+   Much of the sizing (80% width/height) comes from inline styles in Hobbies.js,
+   but here we style internal elements further.
+*/
+
+/* Close "X" button in the modal */
+.close-modal-button {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  color: #333;
+  float: right;
+  cursor: pointer;
+  margin-top: -10px;
+  margin-right: -10px;
+  transition: color 0.3s ease;
+}
+
+.close-modal-button:hover {
+  color: #b71c1c;
+}
+
+/* The main content area inside the modal */
+.modal-content {
   width: 100%;
   height: 100%;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-  object-fit: cover;
+  overflow-y: auto; /* Scroll if content is tall */
 }
 
-h2,
-h3 {
-  color: #ddd;
-  margin-bottom: 10px;
+.modal-content h2 {
+  margin-bottom: 15px;
+  color: #2196f3;
+  font-weight: bold;
 }
 
-h2 {
-  text-align: center;
+/* ------------- Modal Videos Layout ------------- */
+.modal-videos-row {
+  display: flex;
+  flex-wrap: wrap; /* Wrap videos to new row when space is limited */
+  gap: 15px;
+  margin-top: 10px;
 }
 
+.modal-videos-row .video {
+  max-width: 300px;
+  border: 2px solid #2196f3;
+  border-radius: 5px;
+  background: #000;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.modal-videos-row .video:hover {
+  border-color: #1976d2;
+}
+
+/* ------------- Error Message ------------- */
 .error {
-  color: #ff0000;
+  color: #b71c1c;
   font-weight: bold;
   text-align: center;
   margin-top: 20px;
+  border: 2px solid #f44336;
+  padding: 10px;
+  border-radius: 6px;
+  background-color: #ffebee;
 }
