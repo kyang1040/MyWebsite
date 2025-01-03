@@ -213,7 +213,7 @@
 .modal-close {
   position: absolute;
   top: 1rem;
-  right: 1rem;
+  right: 1.5rem;
   background: #333;
   color: white;
   border: none;
@@ -248,6 +248,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
 
 .video-wrapper {
