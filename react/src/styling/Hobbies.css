@@ -1,21 +1,3 @@
-/* ------------- Reset default margins/padding for html/body ------------- */
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
-/* ------------- Main Container ------------- */
-.container {
-  font-family: "Arial", sans-serif;
-  max-width: 1200px;
-  margin: 80px auto 0 auto; /* Adjust top margin if you have a fixed header above */
-  padding: 20px;
-  background-color: #f9f9f9; /* Slight off-white */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
-
 /* ------------- Image Gallery (5 images at the top) ------------- */
 .image-gallery {
   display: flex;
@@ -162,4 +144,259 @@ body {
   padding: 10px;
   border-radius: 6px;
   background-color: #ffebee;
+}
+:root {
+  --primary-orange: #ff6b00;
+  --secondary-orange: #ff8533;
+  --primary-black: #1a1a1a;
+  --white: #ffffff;
+}
+
+/* Container styling */
+.hobbies-container {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+/* Title styling */
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--primary-black);
+  margin-bottom: 2rem;
+}
+
+/* Image gallery styling */
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.image-gallery::before {
+  content: "Throughout the years";
+  position: absolute;
+  top: -3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  color: var(--primary-black);
+  width: 100%;
+  text-align: center;
+}
+
+.gallery-image {
+  width: 100%;
+  height: 15rem;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-image:hover {
+  transform: translateY(-0.3125rem);
+  box-shadow: 0 0.5rem 0.75rem rgba(0, 0, 0, 0.15);
+}
+
+/* Years row styling */
+.years-row {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+  width: 100%;
+  position: relative;
+}
+
+.year-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 12.5rem;
+  position: relative;
+}
+
+.year-toggle-button {
+  background-color: var(--primary-orange);
+  color: var(--white);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-align: center;
+}
+
+.year-toggle-button:hover {
+  background-color: var(--secondary-orange);
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.25rem 0.5rem rgba(255, 107, 0, 0.3);
+}
+
+.year-sub-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--white);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+.year-sub-options.expanded {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.sub-option-button {
+  background-color: var(--white);
+  color: var(--primary-black);
+  border: 0.125rem solid var(--primary-orange);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.sub-option-button:hover {
+  background-color: var(--primary-orange);
+  color: var(--white);
+  transform: translateX(0.3125rem);
+}
+
+/* Modal content styling */
+.modal-content {
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.modal-content h2 {
+  color: var(--primary-orange);
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.modal-videos-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.video {
+  width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
+}
+
+/* Modal close button */
+.close-modal-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: var(--primary-black);
+  color: var(--white);
+  border: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-modal-button:hover {
+  background-color: var(--primary-orange);
+  transform: rotate(90deg);
+}
+
+/* Stats list styling */
+.modal-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.modal-content li {
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background-color: rgba(255, 107, 0, 0.1);
+  border-radius: 0.375rem;
+  transition: background-color 0.2s ease;
+  color: var(--primary-black);
+}
+
+.modal-content li:hover {
+  background-color: var(--primary-orange);
+  color: var(--white);
+}
+
+/* Error message styling */
+.error {
+  background-color: #ffebee;
+  color: var(--primary-black);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  margin-top: 1rem;
+  border: 0.0625rem solid var(--primary-orange);
+}
+
+/* Responsive design */
+@media (max-width: 64rem) {
+  .image-gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 48rem) {
+  .image-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .year-wrapper {
+    min-width: 10rem;
+  }
+}
+
+@media (max-width: 30rem) {
+  .image-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .hobbies-container {
+    padding: 1rem;
+  }
+
+  .years-row {
+    gap: 1rem;
+  }
 }

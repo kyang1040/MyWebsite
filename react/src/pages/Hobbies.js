@@ -9,15 +9,7 @@ const Hobbies = () => {
   const [stats, setStats] = useState({});
   const [videos, setVideos] = useState({});
   const [error, setError] = useState(null);
-
-  // Tracks which year is expanded (to show sub-options)
-  // Example structure: { "2014": true, "2015": false, ... }
   const [yearToggles, setYearToggles] = useState({});
-
-  // We’ll open the same modal for stats, singles, doubles, etc.
-  // activeYear: which year is currently shown in the modal
-  // activeCategory: "Stats", "Singles", "Doubles", "Triples", or "Homeruns"
-  // For College, activeCategory might be "College"
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [activeYear, setActiveYear] = useState(null);
   const [activeCategory, setActiveCategory] = useState(null);
@@ -33,7 +25,7 @@ const Hobbies = () => {
 
   const years = ["2014", "2015", "2016", "College"];
 
-  // ------------------- Data Fetching -------------------
+  // Data Fetching Functions
   const fetchStats = async (path) => {
     try {
       const response = await fetch(path);
@@ -57,6 +49,7 @@ const Hobbies = () => {
     }
   };
 
+  // Initial Data Loading
   useEffect(() => {
     const loadContent = async () => {
       const statsData = {};
@@ -74,24 +67,21 @@ const Hobbies = () => {
     loadContent();
   }, []);
 
-  // ------------------- Toggle Logic -------------------
+  // Toggle Year Function
   const toggleYear = (year) => {
-    // If it’s "College," skip the toggle and open the modal immediately
     if (year === "College") {
       openModal("College", "College");
       return;
     }
 
-    setYearToggles((prev) => {
-      const isCurrentlyOpen = !!prev[year];
-      return {
-        ...prev,
-        [year]: !isCurrentlyOpen,
-      };
-    });
+    setYearToggles((prev) => ({
+      // Close all other years when opening a new one
+      ...Object.keys(prev).reduce((acc, key) => ({ ...acc, [key]: false }), {}),
+      [year]: !prev[year],
+    }));
   };
 
-  // ------------------- Modal Logic -------------------
+  // Modal Functions
   const openModal = (year, category) => {
     setActiveYear(year);
     setActiveCategory(category);
@@ -104,11 +94,11 @@ const Hobbies = () => {
     setActiveCategory(null);
   };
 
-  // Returns the actual content (JSX) for the open modal
+  // Modal Content Function
   const getModalContent = () => {
     if (!activeYear || !activeCategory) return null;
 
-    // College was clicked: show College videos
+    // College Content
     if (activeYear === "College" && activeCategory === "College") {
       const videoList = videos["College"] || [];
       return (
@@ -132,9 +122,8 @@ const Hobbies = () => {
       );
     }
 
-    // For 2014, 2015, 2016 subcategories
+    // Stats Content
     if (activeCategory === "Stats") {
-      // Show the lines from stats
       const textLines = stats[activeYear] || [];
       return (
         <div className="modal-content">
@@ -150,38 +139,37 @@ const Hobbies = () => {
           )}
         </div>
       );
-    } else {
-      // Singles, Doubles, Triples, Homeruns
-      const videoPathKey = `${activeYear}/${activeCategory}`; // e.g. "2014/Singles"
-      const videoList = videos[videoPathKey] || [];
-      return (
-        <div className="modal-content">
-          <h2>
-            {activeCategory} for {activeYear}
-          </h2>
-          <div className="modal-videos-row">
-            {videoList.length > 0 ? (
-              videoList.map((vid, idx) => (
-                <video
-                  key={idx}
-                  className="video"
-                  controls
-                  src={`/misc/Baseball/${videoPathKey}/${vid}`}
-                />
-              ))
-            ) : (
-              <p>No videos available</p>
-            )}
-          </div>
-        </div>
-      );
     }
+
+    // Videos Content (Singles, Doubles, Triples, Homeruns)
+    const videoPathKey = `${activeYear}/${activeCategory}`;
+    const videoList = videos[videoPathKey] || [];
+    return (
+      <div className="modal-content">
+        <h2>
+          {activeCategory} for {activeYear}
+        </h2>
+        <div className="modal-videos-row">
+          {videoList.length > 0 ? (
+            videoList.map((vid, idx) => (
+              <video
+                key={idx}
+                className="video"
+                controls
+                src={`/misc/Baseball/${videoPathKey}/${vid}`}
+              />
+            ))
+          ) : (
+            <p>No videos available</p>
+          )}
+        </div>
+      </div>
+    );
   };
 
-  // ------------------- Rendering -------------------
   return (
-    <div className="container">
-      {/* 1) Top row of 5 images */}
+    <div className="hobbies-container">
+      {/* Image Gallery */}
       <div className="image-gallery">
         {imagePaths.map((image, index) => (
           <img
@@ -193,13 +181,11 @@ const Hobbies = () => {
         ))}
       </div>
 
-      {/* 2) Row of years, centered */}
+      {/* Years Row */}
       <div className="years-row">
         {years.map((year) => {
           const isOpen = !!yearToggles[year];
 
-          // For 2014, 2015, 2016: we’ll show sub-options if open
-          // For College: we skip sub-options
           return (
             <div key={year} className="year-wrapper">
               <button
@@ -209,9 +195,8 @@ const Hobbies = () => {
                 {isOpen ? "–" : "+"} {year}
               </button>
 
-              {/* Sub-options (vertical list) for 2014, 2015, 2016 only */}
-              {year !== "College" && isOpen && (
-                <div className="year-sub-options">
+              {year !== "College" && (
+                <div className={`year-sub-options ${isOpen ? "expanded" : ""}`}>
                   <button
                     onClick={() => openModal(year, "Stats")}
                     className="sub-option-button"
@@ -249,7 +234,7 @@ const Hobbies = () => {
         })}
       </div>
 
-      {/* 3) React Modal */}
+      {/* Modal */}
       <ReactModal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -276,7 +261,7 @@ const Hobbies = () => {
         {getModalContent()}
       </ReactModal>
 
-      {/* 4) Error Message */}
+      {/* Error Message */}
       {error && <div className="error">{error}</div>}
     </div>
   );
