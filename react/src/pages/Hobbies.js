@@ -69,45 +69,51 @@ const Hobbies = () => {
     }
   };
 
-  // 1) If a year is toggled open and we click "College",
-  //    it closes the toggled year, just like toggling from 2014->2015.
+  /**
+   * Toggle the specified year:
+   * 1) If year is currently open, close it.
+   * 2) If year is closed, close all others, then open this one.
+   * 3) If it's "College," open the modal and close all toggles.
+   */
   const toggleYear = (year) => {
-    // Same "close all" logic for any year
-    setYearToggles((prev) =>
-      Object.keys(prev).reduce((acc, key) => {
+    setYearToggles((prev) => {
+      // Was this year currently open?
+      const wasOpen = !!prev[year];
+
+      // Create a blank "close all" object
+      const newToggles = Object.keys(prev).reduce((acc, key) => {
         acc[key] = false;
         return acc;
-      }, {})
-    );
+      }, {});
 
-    if (year === "College") {
-      // Open the modal immediately
-      openModal("College", "College");
-      return;
-    }
-    // Otherwise, open that year's dropdown
-    setYearToggles((prev) => ({
-      ...prev,
-      [year]: true,
-    }));
+      // If year is "College," open the modal & return (closing all toggles)
+      if (year === "College") {
+        openModal("College", "College");
+        return newToggles; // everything remains closed
+      }
+
+      // If year wasn't open before, open it now
+      if (!wasOpen) {
+        newToggles[year] = true;
+      }
+      return newToggles;
+    });
   };
 
-  // 2) Opening the modal locks body scroll
   const openModal = (year, category) => {
     setActiveYear(year);
     setActiveCategory(category);
     setModalIsOpen(true);
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
   };
 
-  // 2) & 5) On close, untoggle year + re-enable body scroll
   const closeModal = () => {
     setModalIsOpen(false);
     setActiveYear(null);
     setActiveCategory(null);
-    // All years get untoggled on close
+    // Untoggle all on close
     setYearToggles({});
-    document.body.style.overflow = "unset";
+    document.body.style.overflow = "unset"; // unlock scroll
   };
 
   if (loading) {
@@ -142,50 +148,44 @@ const Hobbies = () => {
 
         {/* Years Grid */}
         <div className="years-grid">
-          {years.map((year) => (
-            <div key={year} className="year-card">
-              <button
-                onClick={() => toggleYear(year)}
-                className={`year-button ${yearToggles[year] ? "active" : ""}`}
-              >
-                <span>{year}</span>
-                {/* Show up/down chevron for 2014/2015/2016 only */}
-                {year !== "College" &&
-                  (yearToggles[year] ? (
-                    <ChevronUp className="icon" />
-                  ) : (
-                    <ChevronDown className="icon" />
-                  ))}
-              </button>
+          {years.map((year) => {
+            const isOpen = !!yearToggles[year];
+            return (
+              <div key={year} className="year-card">
+                <button
+                  onClick={() => toggleYear(year)}
+                  className={`year-button ${isOpen ? "active" : ""}`}
+                >
+                  <span>{year}</span>
+                  {/* Show up/down chevron for 2014/2015/2016 only */}
+                  {year !== "College" &&
+                    (isOpen ? <ChevronUp /> : <ChevronDown />)}
+                </button>
 
-              {/* Sub-options appear if toggled (and not College) */}
-              {year !== "College" && yearToggles[year] && (
-                <div className="dropdown-menu">
-                  {["Stats", "Singles", "Doubles", "Triples", "Homeruns"].map(
-                    (category) => (
-                      <button
-                        key={category}
-                        onClick={() => openModal(year, category)}
-                        className="dropdown-item"
-                      >
-                        <span className="plus-icon">+</span>
-                        <span>{category}</span>
-                      </button>
-                    )
-                  )}
-                </div>
-              )}
-            </div>
-          ))}
+                {year !== "College" && isOpen && (
+                  <div className="dropdown-menu">
+                    {["Stats", "Singles", "Doubles", "Triples", "Homeruns"].map(
+                      (category) => (
+                        <button
+                          key={category}
+                          onClick={() => openModal(year, category)}
+                          className="dropdown-item"
+                        >
+                          <span className="plus-icon">+</span>
+                          <span>{category}</span>
+                        </button>
+                      )
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
-        {/* 3) & 5) Modal only closes with "X"; user can scroll the content inside */}
+        {/* Modal */}
         {modalIsOpen && (
           <div className="modal-overlay">
-            {/* 
-              pointer-events: none on the overlay or removing
-              onClick here ensures we can't close by clicking outside 
-            */}
             <div
               className="modal-content"
               // Stop click from closing; user can only press "X"
