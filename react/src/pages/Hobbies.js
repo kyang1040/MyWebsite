@@ -19,6 +19,7 @@ const Hobbies = () => {
     "/misc/Baseball/Images/Little_Pitch.JPG",
     "/misc/Baseball/Images/Cooperstown.JPEG",
     "/misc/Baseball/Images/Westfield_Pitch.JPEG",
+    "/misc/Baseball/Images/Baseball_Princeton.PNG",
     "/misc/Baseball/Images/Team_Pic.PNG",
     "/misc/Baseball/Images/MVP.JPG",
   ];
