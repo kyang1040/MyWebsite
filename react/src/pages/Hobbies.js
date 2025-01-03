@@ -206,7 +206,7 @@ const Hobbies = () => {
                 className="year-toggle-button"
                 onClick={() => toggleYear(year)}
               >
-                {isOpen || year === "College" ? "–" : "+"} {year}
+                {isOpen ? "–" : "+"} {year}
               </button>
 
               {/* Sub-options (vertical list) for 2014, 2015, 2016 only */}
