@@ -135,10 +135,11 @@
 /* ========================
      Dropdown Menu
      ======================== */
+/* Change from absolute to static so content flows below, 
+     preventing overlap */
 .dropdown-menu {
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  left: 0;
+  position: static;
+  margin-top: 0.5rem; /* space under the button */
   width: 100%;
   background: #ffffff;
   border-radius: 0.75rem;
@@ -189,10 +190,6 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
-  /* (3) The rest of the screen is a background color,
-       but now we remove pointer-events for the overlay
-       so you can't click outside. 
-       We'll still see the semi-trans overlay. */
   background: rgba(0, 0, 0, 0.75);
   display: flex;
   align-items: center; /* center vertically */
