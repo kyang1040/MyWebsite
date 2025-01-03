@@ -14,7 +14,7 @@ const Footer = () => {
             Download Resume
           </a>
         </p>
-        <p>Last Updated: December 2024</p>
+        <p>Last Updated: January 2025</p>
       </div>
     </footer>
   );
