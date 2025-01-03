@@ -25,7 +25,7 @@ const Hobbies = () => {
 
   const years = ["2014", "2015", "2016", "College"];
 
-  // Data Fetching Functions
+  // ------------------- Data Fetching -------------------
   const fetchStats = async (path) => {
     try {
       const response = await fetch(path);
@@ -49,11 +49,10 @@ const Hobbies = () => {
     }
   };
 
-  // Initial Data Loading
+  // ------------------- Load Stats & Videos on Mount -------------------
   useEffect(() => {
     const loadContent = async () => {
       const statsData = {};
-      // Only fetch stats for 2014, 2015, 2016
       for (const year of years.filter((y) => y !== "College")) {
         statsData[year] = await fetchStats(
           `/misc/Baseball/Stats/game_data_${year}_stats.txt`
@@ -67,21 +66,23 @@ const Hobbies = () => {
     loadContent();
   }, []);
 
-  // Toggle Year Function
+  // ------------------- Toggle Year / College -------------------
   const toggleYear = (year) => {
+    // If it's "College", open the modal immediately with College videos
     if (year === "College") {
       openModal("College", "College");
       return;
     }
 
+    // Otherwise, expand/collapse this year's options,
+    // while collapsing all other years
     setYearToggles((prev) => ({
-      // Close all other years when opening a new one
       ...Object.keys(prev).reduce((acc, key) => ({ ...acc, [key]: false }), {}),
       [year]: !prev[year],
     }));
   };
 
-  // Modal Functions
+  // ------------------- Modal Logic -------------------
   const openModal = (year, category) => {
     setActiveYear(year);
     setActiveCategory(category);
@@ -94,11 +95,11 @@ const Hobbies = () => {
     setActiveCategory(null);
   };
 
-  // Modal Content Function
+  // Determine which content to show inside the modal
   const getModalContent = () => {
     if (!activeYear || !activeCategory) return null;
 
-    // College Content
+    // College videos
     if (activeYear === "College" && activeCategory === "College") {
       const videoList = videos["College"] || [];
       return (
@@ -122,7 +123,7 @@ const Hobbies = () => {
       );
     }
 
-    // Stats Content
+    // Stats
     if (activeCategory === "Stats") {
       const textLines = stats[activeYear] || [];
       return (
@@ -141,7 +142,7 @@ const Hobbies = () => {
       );
     }
 
-    // Videos Content (Singles, Doubles, Triples, Homeruns)
+    // Singles, Doubles, Triples, Homeruns
     const videoPathKey = `${activeYear}/${activeCategory}`;
     const videoList = videos[videoPathKey] || [];
     return (
@@ -167,8 +168,12 @@ const Hobbies = () => {
     );
   };
 
+  // ------------------- Render -------------------
   return (
     <div className="hobbies-container">
+      {/* Heading above the gallery */}
+      <h2 className="gallery-heading">Baseball Throughout the Years...</h2>
+
       {/* Image Gallery */}
       <div className="image-gallery">
         {imagePaths.map((image, index) => (
@@ -195,6 +200,7 @@ const Hobbies = () => {
                 {isOpen ? "–" : "+"} {year}
               </button>
 
+              {/* Sub-options for 2014, 2015, 2016 only (College bypasses) */}
               {year !== "College" && (
                 <div className={`year-sub-options ${isOpen ? "expanded" : ""}`}>
                   <button
