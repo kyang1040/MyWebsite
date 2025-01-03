@@ -1,9 +1,7 @@
+// Hobbies.js
 import React, { useState, useEffect } from "react";
-import ReactModal from "react-modal";
+import { X, ChevronDown, ChevronUp } from "lucide-react";
 import "../styling/Hobbies.css";
-
-// Make sure to bind modal to your appElement (for accessibility)
-ReactModal.setAppElement("#root");
 
 const Hobbies = () => {
   const [stats, setStats] = useState({});
@@ -13,8 +11,9 @@ const Hobbies = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [activeYear, setActiveYear] = useState(null);
   const [activeCategory, setActiveCategory] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // 5 Images at the top
   const imagePaths = [
     "/misc/Baseball/Images/Little_Pitch.JPG",
     "/misc/Baseball/Images/Cooperstown.JPEG",
@@ -25,7 +24,25 @@ const Hobbies = () => {
 
   const years = ["2014", "2015", "2016", "College"];
 
-  // ------------------- Data Fetching -------------------
+  useEffect(() => {
+    const loadContent = async () => {
+      try {
+        const statsData = {};
+        for (const year of years.filter((y) => y !== "College")) {
+          statsData[year] = await fetchStats(
+            `/misc/Baseball/Stats/game_data_${year}_stats.txt`
+          );
+        }
+        setStats(statsData);
+        const videoData = await fetchVideoData();
+        setVideos(videoData);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadContent();
+  }, []);
+
   const fetchStats = async (path) => {
     try {
       const response = await fetch(path);
@@ -49,226 +66,173 @@ const Hobbies = () => {
     }
   };
 
-  // ------------------- Load Stats & Videos on Mount -------------------
-  useEffect(() => {
-    const loadContent = async () => {
-      const statsData = {};
-      for (const year of years.filter((y) => y !== "College")) {
-        statsData[year] = await fetchStats(
-          `/misc/Baseball/Stats/game_data_${year}_stats.txt`
-        );
-      }
-      setStats(statsData);
-
-      const videoData = await fetchVideoData();
-      setVideos(videoData);
-    };
-    loadContent();
-  }, []);
-
-  // ------------------- Toggle Year / College -------------------
   const toggleYear = (year) => {
-    // If it's "College", open the modal immediately with College videos
     if (year === "College") {
       openModal("College", "College");
       return;
     }
-
-    // Otherwise, expand/collapse this year's options,
-    // while collapsing all other years
     setYearToggles((prev) => ({
       ...Object.keys(prev).reduce((acc, key) => ({ ...acc, [key]: false }), {}),
       [year]: !prev[year],
     }));
   };
 
-  // ------------------- Modal Logic -------------------
   const openModal = (year, category) => {
     setActiveYear(year);
     setActiveCategory(category);
     setModalIsOpen(true);
+    document.body.style.overflow = "hidden";
   };
 
   const closeModal = () => {
     setModalIsOpen(false);
     setActiveYear(null);
     setActiveCategory(null);
+    document.body.style.overflow = "unset";
   };
 
-  // Determine which content to show inside the modal
-  const getModalContent = () => {
-    if (!activeYear || !activeCategory) return null;
-
-    // College videos
-    if (activeYear === "College" && activeCategory === "College") {
-      const videoList = videos["College"] || [];
-      return (
-        <div className="modal-content">
-          <h2>College Videos</h2>
-          <div className="modal-videos-row">
-            {videoList.length > 0 ? (
-              videoList.map((vid, idx) => (
-                <video
-                  key={idx}
-                  className="video"
-                  controls
-                  src={`/misc/Baseball/College/${vid}`}
-                />
-              ))
-            ) : (
-              <p>No videos available</p>
-            )}
-          </div>
-        </div>
-      );
-    }
-
-    // Stats
-    if (activeCategory === "Stats") {
-      const textLines = stats[activeYear] || [];
-      return (
-        <div className="modal-content">
-          <h2>Stats for {activeYear}</h2>
-          {textLines.length > 0 ? (
-            <ul>
-              {textLines.map((line, idx) => (
-                <li key={idx}>{line}</li>
-              ))}
-            </ul>
-          ) : (
-            <p>No stats available</p>
-          )}
-        </div>
-      );
-    }
-
-    // Singles, Doubles, Triples, Homeruns
-    const videoPathKey = `${activeYear}/${activeCategory}`;
-    const videoList = videos[videoPathKey] || [];
+  if (loading) {
     return (
-      <div className="modal-content">
-        <h2>
-          {activeCategory} for {activeYear}
-        </h2>
-        <div className="modal-videos-row">
-          {videoList.length > 0 ? (
-            videoList.map((vid, idx) => (
-              <video
-                key={idx}
-                className="video"
-                controls
-                src={`/misc/Baseball/${videoPathKey}/${vid}`}
-              />
-            ))
-          ) : (
-            <p>No videos available</p>
-          )}
-        </div>
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p>Loading baseball memories...</p>
       </div>
     );
-  };
+  }
 
-  // ------------------- Render -------------------
   return (
     <div className="hobbies-container">
-      {/* Heading above the gallery */}
-      <h2 className="gallery-heading">Baseball Throughout the Years...</h2>
+      <div className="content-wrapper">
+        <h1 className="main-title">Baseball Throughout the Years...</h1>
 
-      {/* Image Gallery */}
-      <div className="image-gallery">
-        {imagePaths.map((image, index) => (
-          <img
-            key={index}
-            src={image}
-            alt={`Photo ${index + 1}`}
-            className="gallery-image"
-          />
-        ))}
-      </div>
+        <div className="image-gallery">
+          {imagePaths.map((image, index) => (
+            <div
+              key={index}
+              className="image-card"
+              onClick={() => setSelectedImage(image)}
+            >
+              <img src={image} alt={`Baseball moment ${index + 1}`} />
+              <div className="image-overlay">
+                <span>View</span>
+              </div>
+            </div>
+          ))}
+        </div>
 
-      {/* Years Row */}
-      <div className="years-row">
-        {years.map((year) => {
-          const isOpen = !!yearToggles[year];
-
-          return (
-            <div key={year} className="year-wrapper">
+        <div className="years-grid">
+          {years.map((year) => (
+            <div key={year} className="year-card">
               <button
-                className="year-toggle-button"
                 onClick={() => toggleYear(year)}
+                className={`year-button ${yearToggles[year] ? "active" : ""}`}
               >
-                {isOpen ? "–" : "+"} {year}
+                <span>{year}</span>
+                {year !== "College" &&
+                  (yearToggles[year] ? (
+                    <ChevronUp className="icon" />
+                  ) : (
+                    <ChevronDown className="icon" />
+                  ))}
               </button>
 
-              {/* Sub-options for 2014, 2015, 2016 only (College bypasses) */}
-              {year !== "College" && (
-                <div className={`year-sub-options ${isOpen ? "expanded" : ""}`}>
-                  <button
-                    onClick={() => openModal(year, "Stats")}
-                    className="sub-option-button"
-                  >
-                    + Stats
-                  </button>
-                  <button
-                    onClick={() => openModal(year, "Singles")}
-                    className="sub-option-button"
-                  >
-                    + Singles
-                  </button>
-                  <button
-                    onClick={() => openModal(year, "Doubles")}
-                    className="sub-option-button"
-                  >
-                    + Doubles
-                  </button>
-                  <button
-                    onClick={() => openModal(year, "Triples")}
-                    className="sub-option-button"
-                  >
-                    + Triples
-                  </button>
-                  <button
-                    onClick={() => openModal(year, "Homeruns")}
-                    className="sub-option-button"
-                  >
-                    + Homeruns
-                  </button>
+              {year !== "College" && yearToggles[year] && (
+                <div className="dropdown-menu">
+                  {["Stats", "Singles", "Doubles", "Triples", "Homeruns"].map(
+                    (category) => (
+                      <button
+                        key={category}
+                        onClick={() => openModal(year, category)}
+                        className="dropdown-item"
+                      >
+                        <span className="plus-icon">+</span>
+                        <span>{category}</span>
+                      </button>
+                    )
+                  )}
                 </div>
               )}
             </div>
-          );
-        })}
+          ))}
+        </div>
+
+        {modalIsOpen && (
+          <div className="modal-overlay" onClick={closeModal}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              <button className="modal-close" onClick={closeModal}>
+                <X />
+              </button>
+              <div className="modal-body">
+                <ContentSection
+                  year={activeYear}
+                  category={activeCategory}
+                  stats={stats}
+                  videos={videos}
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {selectedImage && (
+          <div className="lightbox" onClick={() => setSelectedImage(null)}>
+            <img src={selectedImage} alt="Enlarged view" />
+          </div>
+        )}
+
+        {error && <div className="error-toast">{error}</div>}
       </div>
+    </div>
+  );
+};
 
-      {/* Modal */}
-      <ReactModal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={{
-          content: {
-            width: "80vw",
-            height: "80vh",
-            margin: "auto",
-            border: "2px solid #2196f3",
-            borderRadius: "8px",
-            backgroundColor: "#ffffff",
-            padding: "20px",
-          },
-          overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            zIndex: 9999,
-          },
-        }}
-        contentLabel="Modal"
-      >
-        <button className="close-modal-button" onClick={closeModal}>
-          X
-        </button>
-        {getModalContent()}
-      </ReactModal>
+const ContentSection = ({ year, category, stats, videos }) => {
+  if (year === "College" && category === "College") {
+    const videoList = videos["College"] || [];
+    return (
+      <div className="content-section">
+        <h2>College Highlights</h2>
+        <div className="video-grid">
+          {videoList.map((vid, idx) => (
+            <div key={idx} className="video-wrapper">
+              <video controls src={`/misc/Baseball/College/${vid}`} />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
-      {/* Error Message */}
-      {error && <div className="error">{error}</div>}
+  if (category === "Stats") {
+    const textLines = stats[year] || [];
+    return (
+      <div className="content-section">
+        <h2>{year} Statistics</h2>
+        <div className="stats-list">
+          {textLines.map((line, idx) => (
+            <div key={idx} className="stat-item">
+              {line}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  const videoPathKey = `${year}/${category}`;
+  const videoList = videos[videoPathKey] || [];
+  return (
+    <div className="content-section">
+      <h2>
+        {category} - {year}
+      </h2>
+      <div className="video-grid">
+        {videoList.map((vid, idx) => (
+          <div key={idx} className="video-wrapper">
+            <video controls src={`/misc/Baseball/${videoPathKey}/${vid}`} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

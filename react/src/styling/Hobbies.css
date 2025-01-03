@@ -1,302 +1,378 @@
-/* =========================
-   Root Variables & Reset
-   ========================= */
-:root {
-  /* Colors */
-  --bg-color: #1a1a1a; /* Dark background */
-  --text-color: #ffffff; /* White text */
-  --accent-color: #ff6b00; /* Bold orange for highlights */
-  --accent-hover: #ff8533; /* Hover orange color */
-  --black: #000000;
-  --white: #ffffff;
-
-  /* Fonts */
-  --heading-font: "Arial", sans-serif;
-  --body-font: "Arial", sans-serif;
-
-  /* Transitions */
-  --transition-speed: 0.3s; /* 300ms */
-
-  /* 
-      Optional: If you want to ensure 1rem = 16px exactly,
-      you could do:
-      html { font-size: 16px; }
-    */
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-family: var(--body-font);
-  height: 100%;
-  box-sizing: border-box;
-}
-
-/* =========================
-     Hobbies Container
-     ========================= */
+/* Base styles */
 .hobbies-container {
-  /* 
-      Use flex to center content vertically & horizontally
-      within the viewport area.
-    */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a1a, #000000);
+  color: #ffffff;
+  padding: 2rem 1rem;
+}
 
-  width: 100%;
-  max-width: 75rem; /* 75rem ~ 1200px */
-  min-height: calc(
-    100vh - 6rem
-  ); /* Subtract ~6rem if you have a header/footer */
+.content-wrapper {
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 1rem 2rem;
-  gap: 2rem;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out forwards;
 }
 
-/* =========================
-     Gallery Heading
-     ========================= */
-.gallery-heading {
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Title */
+.main-title {
+  font-size: clamp(2rem, 5vw, 4rem);
   text-align: center;
-  font-family: var(--heading-font);
-  font-size: 3rem; /* ~48px if 1rem = 16px */
-  font-weight: bold;
-  margin: 0;
-  color: var(--text-color);
-  letter-spacing: 0.05em;
-  line-height: 1.2;
+  margin-bottom: 3rem;
+  background: linear-gradient(to right, #ff6b00, #ff8533);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
 }
 
-/* =========================
-     Image Gallery
-     ========================= */
+/* Image Gallery */
 .image-gallery {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem; /* ~32px gap */
-  margin-bottom: 1rem; /* ~16px */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
 }
 
-.gallery-image {
-  /* 
-      ~300×200 in "rem" 
-      300/16=18.75, 200/16=12.5
-      Use 'contain' so the entire image is visible (no cropping).
-    */
-  width: 18.75rem; /* ~300px */
-  height: 12.5rem; /* ~200px */
-  object-fit: contain; /* Show the whole image without cutting off */
-  background-color: #000; /* Background behind letterboxing, if aspect ratio differs */
-  border-radius: 0.5rem; /* ~8px */
+.image-card {
+  position: relative;
+  aspect-ratio: 16/9;
+  border-radius: 1rem;
+  overflow: hidden;
   cursor: pointer;
-  transition: transform var(--transition-speed) ease,
-    box-shadow var(--transition-speed) ease;
+  transition: transform 0.3s ease;
 }
 
-.gallery-image:hover {
-  transform: scale(1.08);
-  /* 0 0.75rem 1.5rem ~ 0 12px 24px */
-  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.3);
+.image-card:hover {
+  transform: scale(1.02);
 }
 
-/* =========================
-     Years Row
-     ========================= */
-.years-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2.5rem; /* ~40px */
-  margin-bottom: 1rem;
-}
-
-.year-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative; /* For sub-option dropdown positioning */
-}
-
-/* =========================
-     Year Toggle Button
-     ========================= */
-.year-toggle-button {
-  background-color: var(--accent-color);
-  color: var(--white);
-  border: none;
-  border-radius: 0.5rem; /* ~8px */
-  font-size: 1rem; /* ~16px */
-  font-weight: 600;
-  padding: 0.75rem 1.5rem; /* ~12px, ~24px */
-  cursor: pointer;
-  transition: background-color var(--transition-speed), transform 0.2s ease,
-    box-shadow 0.2s ease;
-  min-width: 6rem; /* ~96px */
-}
-
-.year-toggle-button:hover {
-  background-color: var(--accent-hover);
-  transform: translateY(-0.125rem); /* ~2px up */
-  box-shadow: 0 0.25rem 0.5rem rgba(255, 107, 0, 0.3);
-}
-
-/* =========================
-     Year Sub-Options (Dropdown)
-     ========================= */
-.year-sub-options {
+/* Keep object-fit: contain so the image isn't cut off */
+.image-card img {
   position: absolute;
-  top: 100%;
+  top: 0;
   left: 0;
   width: 100%;
-
-  background-color: var(--white);
-  color: var(--black);
-  border-radius: 0.5rem;
-  padding: 0.5rem; /* ~8px */
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(0.5rem);
-  transition: opacity var(--transition-speed), transform var(--transition-speed),
-    visibility var(--transition-speed);
-  z-index: 999;
-}
-
-.year-sub-options.expanded {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.sub-option-button {
-  background-color: var(--white);
-  color: var(--black);
-  border: 0.125rem solid var(--accent-color); /* ~2px */
-  border-radius: 0.375rem; /* ~6px */
-  font-size: 1rem; /* ~16px */
-  padding: 0.5rem 1rem; /* ~8px, ~16px */
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  margin-bottom: 0.5rem; /* ~8px */
-  transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
-}
-
-.sub-option-button:hover {
-  background-color: var(--accent-color);
-  color: var(--white);
-  transform: translateX(0.25rem); /* ~4px right */
-}
-
-/* =========================
-     Modal-Related Styles
-     (Content is sized inline in Hobbies.js)
-     ========================= */
-.modal-content {
-  width: 100%;
   height: 100%;
-  overflow-y: auto;
-  padding: 1rem;
+  object-fit: contain;
+  background-color: #000000; /* Letterbox background if aspect ratio differs */
 }
 
-.modal-content h2 {
-  margin-bottom: 1rem;
-  font-size: 1.8rem; /* ~28.8px */
-  color: var(--accent-color);
-  text-align: center;
-}
-
-/* Videos inside modal */
-.modal-videos-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem; /* ~16px */
-  margin-top: 1rem; /* ~16px */
-}
-
-.video {
-  max-width: 18.75rem; /* ~300px */
-  width: 100%;
-  border-radius: 0.5rem;
-  background: var(--black);
-  outline: none;
-  box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.3);
-  transition: box-shadow var(--transition-speed);
-}
-
-.video:hover {
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
-}
-
-/* Close button inside the modal */
-.close-modal-button {
+.image-overlay {
   position: absolute;
-  top: 1rem; /* ~16px */
-  right: 1rem; /* ~16px */
-  background-color: var(--black);
-  color: var(--white);
-  border: none;
-  border-radius: 50%;
-  font-size: 1.2rem; /* ~19.2px */
-  width: 2.5rem; /* ~40px */
-  height: 2.5rem; /* ~40px */
-  cursor: pointer;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.close-modal-button:hover {
-  background-color: var(--accent-color);
+.image-card:hover .image-overlay {
+  opacity: 1;
+}
+
+/* Years Grid */
+.years-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.year-card {
+  position: relative;
+}
+
+.year-button {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(to right, #ff6b00, #ff8533);
+  border: none;
+  border-radius: 0.75rem;
+  color: #ffffff;
+  font-size: 1.125rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.year-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.year-button.active {
+  background: linear-gradient(to right, #e65c00, #ff6b00);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  width: 100%;
+  background: white;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-item {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: none;
+  color: #333;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background: #f5f5f5;
+  padding-left: 1.5rem;
+}
+
+/* Modal Overlay
+   1) Use align-items: center to vertically center the modal
+*/
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center; /* Key: Center vertically */
+  justify-content: center; /* Center horizontally */
+  z-index: 50;
+}
+
+/* Modal Content
+   2) Use 80vw & 80vh, plus margin: auto & max-height: 80vh to prevent overflow
+*/
+.modal-content {
+  background: white;
+  border-radius: 1rem;
+  width: 80vw;
+  height: auto;
+  max-height: 80vh; /* So it doesn’t overflow the top or bottom */
+  margin: auto; /* Let the flex container center it in overlay */
+  position: relative;
+  animation: scaleIn 0.3s ease-out;
+  overflow: hidden; /* or auto, if you prefer. We also manage .modal-body overflow. */
+}
+
+.modal-body {
+  padding: 2rem;
+  height: auto;
+  max-height: calc(80vh - 4rem); /* so the content area can scroll */
+  overflow-y: auto;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background: #ff6b00;
   transform: rotate(90deg);
 }
 
-/* =========================
-     Stats List in Modal
-     ========================= */
-.modal-content ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* Content Section */
+.content-section {
+  color: #333;
 }
 
-.modal-content li {
-  background-color: rgba(255, 107, 0, 0.1);
-  color: var(--black);
-  padding: 1rem;
-  margin-bottom: 0.5rem;
-  border-radius: 0.375rem; /* ~6px */
-  transition: background-color 0.2s ease;
-}
-
-.modal-content li:hover {
-  background-color: var(--accent-color);
-  color: var(--white);
-}
-
-/* =========================
-     Error Message
-     ========================= */
-.error {
-  margin-top: 1rem;
-  background-color: #ffebee;
-  color: var(--black);
-  padding: 1rem;
-  border-radius: 0.5rem; /* ~8px */
+.content-section h2 {
+  font-size: 2rem;
   text-align: center;
-  border: 0.0625rem solid var(--accent-color); /* ~1px */
+  margin-bottom: 2rem;
+  color: #ff6b00;
 }
 
-@media (max-width: 1000px) {
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.video-wrapper {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.video-wrapper:hover {
+  transform: translateY(-4px);
+}
+
+.video-wrapper video {
+  width: 100%;
+  display: block;
+}
+
+.stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stat-item {
+  padding: 1rem;
+  background: linear-gradient(to right, #fff5eb, #fff);
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateX(0.5rem);
+  background: linear-gradient(to right, #ffe4cc, #fff);
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+/* Loading */
+.loading-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, #1a1a1a, #000000);
+  color: white;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #ff6b00;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Error Toast */
+.error-toast {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: #ff3333;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
   .hobbies-container {
-    height: auto;
+    padding: 1rem;
+  }
+
+  .main-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .image-gallery {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  /* 
+     On smaller screens, fill entire viewport if needed.
+     You can remove this if you want to keep 80vw x 80vh 
+     even on mobile.
+  */
+  .modal-content {
+    width: 100%;
+    max-height: none;
+    border-radius: 0;
   }
 }
