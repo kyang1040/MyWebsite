@@ -273,7 +273,7 @@
 
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, 368px);
   gap: 1.5rem;
   width: 100%;
   padding: 0 3rem; /* Add horizontal padding to center the videos better */
