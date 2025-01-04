@@ -526,6 +526,13 @@
     align-items: center;
   }
 
+  .content-section h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 0;
+    color: #ff6b00;
+  }
+
   /* X button offset to not overlap content */
   .modal-close {
     top: 1rem;
@@ -533,5 +540,27 @@
     border-radius: 50%;
     width: 2rem;
     height: 2rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 160px);
+    gap: 1.5rem;
+    width: 100%;
+    padding: 0 3rem; /* Add horizontal padding to center the videos better */
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* X button offset to not overlap content */
+  .modal-close {
+    top: 1rem;
+    right: 1.5rem;
+    border-radius: 50%;
+    width: 2.25rem;
+    height: 2.25rem;
   }
 }
