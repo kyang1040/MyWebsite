@@ -105,7 +105,7 @@ const Hobbies = () => {
     setActiveYear(year);
     setActiveCategory(category);
     setModalIsOpen(true);
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
   };
 
   const closeModal = () => {
@@ -114,7 +114,7 @@ const Hobbies = () => {
     setActiveCategory(null);
     // Untoggle all on close
     setYearToggles({});
-    document.body.style.overflow = "unset"; // unlock scroll
+    // document.body.style.overflow = "unset"; // unlock scroll
   };
 
   if (loading) {
