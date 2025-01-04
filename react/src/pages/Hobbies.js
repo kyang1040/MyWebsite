@@ -130,14 +130,18 @@ const Hobbies = () => {
     <div className="hobbies-container">
       <div className="content-wrapper">
         <h1 className="main-title">Baseball Throughout the Years...</h1>
-
-        {/* Image Gallery */}
         <div className="image-gallery">
           {imagePaths.map((image, index) => (
             <div
               key={index}
               className="image-card"
-              onClick={() => setSelectedImage(image)}
+              onClick={() => {
+                if (!modalIsOpen) {
+                  setSelectedImage(image);
+                } else {
+                  alert("Close the modal first!");
+                }
+              }}
             >
               <img src={image} alt={`Baseball moment ${index + 1}`} />
               <div className="image-overlay">
@@ -146,7 +150,30 @@ const Hobbies = () => {
             </div>
           ))}
         </div>
-
+        {modalIsOpen && (
+          <div
+            className="modal-overlay"
+            onClick={closeModal} // Close the modal when clicking on the overlay
+            style={{ pointerEvents: "auto" }} // Ensure overlay prevents interactions
+          >
+            <div
+              className="modal-content"
+              onClick={(e) => e.stopPropagation()} // Prevent clicks inside modal from propagating
+            >
+              <button className="modal-close" onClick={closeModal}>
+                <X />
+              </button>
+              <div className="modal-body">
+                <ContentSection
+                  year={activeYear}
+                  category={activeCategory}
+                  stats={stats}
+                  videos={videos}
+                />
+              </div>
+            </div>
+          </div>
+        )}
         {/* Years Grid */}
         <div className="years-grid">
           {years.map((year) => {
@@ -183,7 +210,6 @@ const Hobbies = () => {
             );
           })}
         </div>
-
         {/* Modal */}
         {modalIsOpen && (
           <div className="modal-overlay">
@@ -206,14 +232,12 @@ const Hobbies = () => {
             </div>
           </div>
         )}
-
         {/* Lightbox for images */}
         {selectedImage && (
           <div className="lightbox" onClick={() => setSelectedImage(null)}>
             <img src={selectedImage} alt="Enlarged view" />
           </div>
         )}
-
         {error && <div className="error-toast">{error}</div>}
       </div>
     </div>
