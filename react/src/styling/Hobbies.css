@@ -405,7 +405,7 @@
      Responsive Adjustments
      ======================== */
 
-@media (max-width: 1300px) {
+@media (max-width: 800px) {
   /* ========================
    Base styles
    ======================== */
@@ -457,35 +457,13 @@
     z-index: 10;
   }
 
-  /* ========================
-     Modal Content
-     ======================== */
-  /* .modal-content {
-    background: #ffffff;
-    border-radius: 1rem;
-    width: 80vw;
-    height: calc(80vh - 8rem);
-    max-height: calc(100vh - 8rem);
-    position: relative;
-    animation: scaleIn 0.3s ease-out;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  } */
-
-  /* .modal-body {
-    padding: 2rem;
-    height: calc(100% - 4rem);
-    overflow-y: auto;
-  } */
-
   /* X button offset to not overlap content */
   .modal-close {
-    position: absolute;
     top: 1rem;
     right: 1.5rem;
     border-radius: 50%;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.25rem;
+    height: 2.25rem;
   }
 
   /* ========================
@@ -499,6 +477,17 @@
   .video-wrapper video {
     width: 100%;
     display: block;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    gap: 1.5rem;
+    width: 100%;
+    padding: 0 3rem; /* Add horizontal padding to center the videos better */
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
   }
 
   .stats-list {
@@ -525,46 +514,24 @@
   }
 }
 
-@media (max-width: 768px) {
-  .hobbies-container {
-    padding: 1rem;
-    justify-content: flex-start; /* top if on smaller screens */
-    height: auto;
+@media (max-width: 600px) {
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px);
+    gap: 1.5rem;
+    width: 100%;
+    padding: 0 3rem; /* Add horizontal padding to center the videos better */
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
   }
 
-  .main-title {
-    font-size: 2rem;
-    margin-bottom: 2rem;
+  /* X button offset to not overlap content */
+  .modal-close {
+    top: 1rem;
+    right: 1.5rem;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
   }
-
-  .image-gallery {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-
-  .modal-overlay {
-    padding: 1rem;
-  }
-
-  .modal-content {
-    width: 90vw;
-    max-height: calc(100vh - 2rem);
-  }
-
-  /* .modal-content {
-    background: #ffffff;
-    border-radius: 1rem;
-    width: 80vw;
-    height: calc(80vh - 8rem);
-    max-height: calc(100vh - 8rem);
-    position: relative;
-    animation: scaleIn 0.3s ease-out;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  } */
-
-  /* .modal-body {
-    padding: 2rem;
-    height: calc(100% - 4rem);
-    overflow-y: auto;
-  } */
 }
