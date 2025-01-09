@@ -49,7 +49,7 @@ const Education = () => {
               <p className="graduation-date">Expected May 2026</p>
             </div>
             <p className="gpa-top">
-              <strong>GPA:</strong> 3.89
+              <strong>GPA:</strong> 3.91
             </p>
           </div>
           <div className="education-content">
